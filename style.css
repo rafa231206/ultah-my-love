@@ -314,20 +314,11 @@ padding-top:80px;
 
 }
 
-.video-box{
-
-max-width:900px;
-
-margin:auto;
-
-background:white;
-
-padding:12px;
-
-border-radius:25px;
-
-box-shadow:0 15px 35px rgba(0,0,0,.2);
-
+.video-box iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:none;
+    border-radius:20px;
 }
 
 video{
