@@ -7,242 +7,249 @@
 
     <title>Happy Birthday ❤️</title>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
-<!-- ==========================
-     LOADING
-========================== -->
+    <!-- =========================
+         LOADING SCREEN
+    ========================== -->
 
-<div id="loading">
+    <div id="loading">
+        <h1>Preparing Your Surprise ❤️</h1>
+    </div>
 
-    <h1>Preparing Your Surprise ❤️</h1>
+    <!-- =========================
+         FLOATING HEARTS
+    ========================== -->
 
-</div>
+    <div id="hearts"></div>
 
-<!-- ==========================
-     FLOATING HEART
-========================== -->
+    <!-- =========================
+         BACKGROUND MUSIC
+    ========================== -->
 
-<div id="hearts"></div>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="assets/music.mp3" type="audio/mpeg">
+        Browser kamu tidak mendukung audio.
+    </audio>
 
-<!-- ==========================
-     MUSIC
-========================== -->
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
 
-<audio id="bgMusic" loop>
+    <section id="hero" class="hero">
 
-    <source src="assets/music.mp3" type="audio/mp3">
+        <div class="glass">
 
-</audio>
+            <h3>For My Favorite Person ❤️</h3>
 
-<!-- ==========================
-     HERO
-========================== -->
+            <h1>Happy Birthday</h1>
 
-<section class="hero">
+            <h2 id="name">
+                Sayangku
+            </h2>
+
+            <p>
+                Selamat ulang tahun ya ❤️ <br>
+                Aku sudah menyiapkan sebuah hadiah kecil khusus untukmu.
+                Semoga semua yang akan kamu lihat hari ini bisa membuatmu
+                tersenyum dan menjadi kenangan yang indah.
+            </p>
+
+            <button id="openGift">
+                🎁 Buka Hadiah
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         CAKE SECTION
+         (LANJUT BAGIAN 2)
+    ========================== -->
+    <!-- =========================
+     CAKE SECTION
+========================= -->
+
+<section id="cakeSection" class="hidden-section">
 
     <div class="glass">
 
-        <h3>For My Favorite Person ❤️</h3>
-
-        <h1>Happy Birthday</h1>
-
-        <h2 id="name">
-
-            Sayangku
-
-        </h2>
+        <h2>🎂 Make A Wish 🎂</h2>
 
         <p>
-
-            Selamat ulang tahun ya ❤️
-
-            Aku sudah menyiapkan sebuah hadiah kecil.
-
-            Semoga apa yang akan kamu lihat hari ini
-
-            bisa membuatmu tersenyum.
-
+            Sebelum melihat hadiah utamanya...
+            <br>
+            Yuk buat permohonan terbaikmu terlebih dahulu ❤️
         </p>
 
-        <button id="openGift">
+        <!-- Cake Container -->
+        <div id="cakeBox">
 
-            🎁 Buka Hadiah
+            <!-- Layer 1 -->
+            <div id="layer1" class="cake-layer hidden"></div>
 
+            <!-- Layer 2 -->
+            <div id="layer2" class="cake-layer hidden"></div>
+
+            <!-- Layer 3 -->
+            <div id="layer3" class="cake-layer hidden"></div>
+
+            <!-- Cream -->
+            <div id="cream" class="hidden"></div>
+
+            <!-- Candle -->
+            <div id="candle" class="hidden">
+
+                <div id="flame"></div>
+
+            </div>
+
+        </div>
+
+        <!-- Button -->
+        <button id="cakeButton" data-step="0">
+            🍰 Munculkan Kue
+        </button>
+
+    </div>
+
+</section>
+<!-- =========================
+     VIDEO SECTION
+========================= -->
+
+<section id="videoSection" class="hidden-section">
+
+    <div class="glass">
+
+        <h2>❤️ Happy Birthday ❤️</h2>
+
+        <p>
+            Ini hadiah kecil dariku untukmu.
+            <br>
+            Semoga kamu menyukainya. ❤️
+        </p>
+
+        <div class="video-box">
+
+            <iframe
+                id="birthdayVideo"
+                src="https://player.cloudinary.com/embed/?cloud_name=ozf0nwgq&public_id=lv_7634068236329405697_20260703034109_twqnpi"
+                allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+        <br>
+
+        <button id="nextGallery">
+            📸 Lihat Galeri
         </button>
 
     </div>
 
 </section>
 
-<!-- ==========================
-     CAKE
-========================== -->
+<!-- =========================
+     GALLERY SECTION
+========================= -->
 
-<section id="cakeSection" class="hidden-section">
+<section id="gallery" class="hidden-section">
 
-    <h2>
+    <div class="glass">
 
-        🎂 Make A Wish
+        <h2>📸 Our Memories</h2>
 
-    </h2>
+        <p>
+            Setiap foto memiliki cerita.
+            <br>
+            Terima kasih sudah menjadi bagian dari perjalanan indah ini. ❤️
+        </p>
 
-    <p>
+        <div class="gallery-grid">
 
-        Sebelum melihat hadiah utamanya...
-
-        Yuk buat permohonan terbaikmu terlebih dahulu ❤️
-
-    </p>
-
-    <div id="cakeBox">
-
-        <div id="layer1" class="cake-layer hidden"></div>
-
-        <div id="layer2" class="cake-layer hidden"></div>
-
-        <div id="layer3" class="cake-layer hidden"></div>
-
-        <div id="cream" class="hidden"></div>
-
-        <div id="candle" class="hidden">
-
-            <div id="flame"></div>
+            <img src="assets/photos/1.jpg" alt="Foto 1" loading="lazy">
+            <img src="assets/photos/2.jpg" alt="Foto 2" loading="lazy">
+            <img src="assets/photos/3.jpg" alt="Foto 3" loading="lazy">
+            <img src="assets/photos/4.jpg" alt="Foto 4" loading="lazy">
+            <img src="assets/photos/5.jpg" alt="Foto 5" loading="lazy">
+            <img src="assets/photos/6.jpg" alt="Foto 6" loading="lazy">
 
         </div>
 
-    </div>
+        <br>
 
-    <button id="cakeButton">
-
-        🍰 Munculkan Kue
-
-    </button>
-
-</section>
-
-<!-- ==========================
-     VIDEO
-========================== -->
-
-<section id="videoSection" class="hidden-section">
-
-    <h2>
-
-        ❤️ Happy Birthday ❤️
-
-    </h2>
-
-    <p>
-
-        Ini hadiah kecil dariku untukmu.
-
-    </p>
-
-    <div class="video-box">
-
-        <iframe
-            id="birthdayVideo"
-            src="https://player.cloudinary.com/embed/?cloud_name=ozf0nwgq&public_id=lv_7634068236329405697_20260703034109_twqnpi"
-            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-            allowfullscreen>
-        </iframe>
+        <button id="nextLetter">
+            💌 Baca Surat
+        </button>
 
     </div>
 
 </section>
-<!-- ==========================
-     GALLERY
-========================== -->
-
-<section id="gallery">
-
-    <h2>📸 Our Memories</h2>
-
-    <p>
-        Setiap foto punya cerita.
-        Terima kasih sudah menjadi bagian dari cerita indah ini. ❤️
-    </p>
-
-    <div class="gallery-grid">
-
-        <img src="assets/photos/1.jpg" alt="Foto 1">
-
-        <img src="assets/photos/2.jpg" alt="Foto 2">
-
-        <img src="assets/photos/3.jpg" alt="Foto 3">
-
-        <img src="assets/photos/4.jpg" alt="Foto 4">
-
-        <img src="assets/photos/5.jpg" alt="Foto 5">
-
-        <img src="assets/photos/6.jpg" alt="Foto 6">
-
-    </div>
-
-</section>
-
-<!-- ==========================
+<!-- =========================
      LOVE LETTER
-========================== -->
+========================= -->
 
-<section id="letter">
+<section id="letter" class="hidden-section">
 
     <div class="glass">
 
         <h2>💌 Untuk Kamu</h2>
 
         <p id="typing">
-
 Selamat ulang tahun ya sayang ❤️
 
 Semoga semua doa dan harapanmu hari ini satu per satu menjadi kenyataan.
 
 Semoga kamu selalu sehat.
-
-Selalu bahagia.
-
-Selalu dikelilingi orang-orang baik.
+Semoga selalu bahagia.
+Semoga selalu dikelilingi orang-orang baik.
 
 Terima kasih sudah hadir di hidupku.
-
 Terima kasih sudah menjadi tempat ternyaman.
 
 Semoga kita bisa terus membuat cerita indah bersama.
 
-Aku sayang kamu. ❤️
-
+Aku sayang kamu ❤️
         </p>
+
+        <br>
+
+        <button id="nextReply">
+            💚 Lanjut
+        </button>
 
     </div>
 
 </section>
 
-<!-- ==========================
-     BALASAN
-========================== -->
+<!-- =========================
+     REPLY SECTION
+========================= -->
 
-<section id="replySection">
+<section id="replySection" class="hidden-section">
 
     <div class="glass">
 
         <h2>💚 Sebelum Menutup Halaman Ini...</h2>
 
         <p>
-
             Aku ingin tahu bagaimana perasaanmu
             setelah melihat semua kejutan ini.
-
-            Tulis apa pun yang ingin kamu sampaikan ya ❤️
-
+            ❤️
         </p>
 
         <textarea
@@ -253,61 +260,70 @@ Aku sayang kamu. ❤️
         <div class="reply-buttons">
 
             <button id="sendWA">
-
                 💚 Kirim Pesan
-
             </button>
 
             <button id="sendVideo">
-
-                📹 Kirim Pesan + Minta Video Asli
-
+                📹 Kirim Pesan + Minta Video
             </button>
 
         </div>
+
+        <br>
+
+        <button id="nextEnding">
+            ❤️ Selesai
+        </button>
 
     </div>
 
 </section>
 
-<!-- ==========================
+<!-- =========================
      ENDING
-========================== -->
+========================= -->
 
-<section id="ending">
+<section id="ending" class="hidden-section">
 
-    <h1>❤️ Happy Birthday ❤️</h1>
+    <div class="glass">
 
-    <p>
+        <h1>❤️ Happy Birthday ❤️</h1>
 
-        Terima kasih sudah membuka hadiah kecil ini.
+        <p>
 
-        Semoga hari ini menjadi awal
-        dari banyak kebahagiaan baru.
+            Terima kasih sudah membuka hadiah kecil ini.
 
-        Aku akan selalu mendoakan
-        semua hal terbaik untukmu.
+            <br><br>
 
-        ❤️
+            Semoga hari ini menjadi awal
+            dari banyak kebahagiaan baru.
 
-    </p>
+            <br><br>
 
-    <button id="replay">
+            Aku akan selalu mendoakan
+            semua hal terbaik untukmu.
 
-        🔄 Putar Lagi
+            ❤️
 
-    </button>
+        </p>
+
+        <br>
+
+        <button id="replay">
+            🔄 Putar Lagi
+        </button>
+
+    </div>
 
 </section>
 
-<!-- ==========================
+<!-- =========================
      CONFETTI
-========================== -->
+========================= -->
 
 <canvas id="confetti"></canvas>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
