@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Loading -->
+<div id="loading">
+    <h1>Preparing your surprise...</h1>
+</div>
+
+<!-- Floating Hearts -->
+<div id="hearts"></div>
+
+<!-- Music -->
+<audio id="bgMusic" loop>
+    <source src="assets/music.mp3" type="audio/mp3">
+</audio>
+
+<!-- Landing -->
+<section class="hero">
+
+    <div class="glass">
+
+        <h3>For My Favorite Person ❤️</h3>
+
+        <h1>Happy Birthday</h1>
+
+        <h2 id="namaPacar">
+            Sayangku
+        </h2>
+
+        <p>
+
+            Hari ini adalah hari yang sangat spesial.
+
+            Ada sesuatu yang sudah aku siapkan khusus untukmu.
+
+        </p>
+
+        <button id="openGift">
+
+            🎁 Buka Hadiah
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- Surprise -->
+<section id="surprise">
+
+    <h2>
+
+        Selamat Ulang Tahun ❤️
+
+    </h2>
+
+    <p class="subtitle">
+
+        Semoga hari ini menjadi awal dari kebahagiaan yang lebih besar lagi.
+
+    </p>
+
+</section>
+
+<!-- Video -->
+<section class="video-section">
+
+<h2>Video Untukmu 🎥</h2>
+
+<div class="video-box">
+
+<video
+id="birthdayVideo"
+controls
+playsinline
+>
+
+<source src="assets/video.mp4" type="video/mp4">
+
+Browser kamu tidak mendukung video.
+
+</video>
+
+</div>
+
+</section>
+
+<!-- Gallery -->
+
+<section class="gallery">
+
+<h2>
+
+Our Memories 📸
+
+</h2>
+
+<div class="gallery-grid">
+
+<img src="assets/photos/1.jpg">
+
+<img src="assets/photos/2.jpg">
+
+<img src="assets/photos/3.jpg">
+
+<img src="assets/photos/4.jpg">
+
+<img src="assets/photos/5.jpg">
+
+<img src="assets/photos/6.jpg">
+
+</div>
+
+</section>
+
+<!-- Love Letter -->
+
+<section class="letter">
+
+<div class="glass-letter">
+
+<h2>
+
+Untuk Kamu ❤️
+
+</h2>
+
+<p id="typing">
+
+Selamat ulang tahun ya, sayang.
+
+Terima kasih sudah hadir dalam hidupku.
+
+Semoga semua impianmu tercapai.
+
+Semoga kamu selalu sehat.
+
+Semoga selalu dikelilingi orang baik.
+
+Semoga kita selalu bersama melewati banyak cerita indah.
+
+Aku bersyukur bisa mengenalmu.
+
+Terima kasih sudah menjadi rumah ternyaman.
+
+Aku sayang kamu.
+
+❤️
+
+</p>
+
+</div>
+
+</section>
+
+<!-- Countdown -->
+
+<section class="countdown">
+
+<h2>
+
+Time Together ❤️
+
+</h2>
+
+<div class="time-box">
+
+<div>
+
+<h1 id="days">
+
+000
+
+</h1>
+
+<p>Hari</p>
+
+</div>
+
+<div>
+
+<h1 id="hours">
+
+00
+
+</h1>
+
+<p>Jam</p>
+
+</div>
+
+<div>
+
+<h1 id="minutes">
+
+00</h1>
+
+<p>Menit</p>
+
+</div>
+
+<div>
+
+<h1 id="seconds">
+
+00</h1>
+
+<p>Detik</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Final -->
+
+<section class="ending">
+
+<h1>
+
+I Love You ❤️
+
+</h1>
+
+<p>
+
+Happy Birthday, Sayang.
+
+Terima kasih sudah menjadi bagian terbaik dalam hidupku.
+
+Semoga semua doa baik selalu menyertaimu.
+
+Aku akan selalu mendukungmu.
+
+❤️
+
+</p>
+
+<button id="replay">
+
+▶ Putar Lagi
+
+</button>
+
+</section>
+
+<!-- Confetti -->
+
+<canvas id="confetti"></canvas>
+
+<script src="script.js"></script>
+
+</body>
+</html>
