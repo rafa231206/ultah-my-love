@@ -310,3 +310,227 @@ window.addEventListener("resize",()=>{
     canvas.height = window.innerHeight;
 
 });
+// ==========================
+// LIGHTBOX GALLERY
+// ==========================
+
+const images = document.querySelectorAll(".gallery-grid img");
+
+const overlay = document.createElement("div");
+overlay.id = "lightbox";
+
+overlay.innerHTML = `
+    <span id="closeLightbox">&times;</span>
+    <img id="lightboxImage">
+`;
+
+document.body.appendChild(overlay);
+
+const lightboxImage = document.getElementById("lightboxImage");
+const closeLightbox = document.getElementById("closeLightbox");
+
+images.forEach(img=>{
+
+    img.addEventListener("click",()=>{
+
+        overlay.style.display="flex";
+
+        lightboxImage.src=img.src;
+
+    });
+
+});
+
+closeLightbox.addEventListener("click",()=>{
+
+    overlay.style.display="none";
+
+});
+
+overlay.addEventListener("click",(e)=>{
+
+    if(e.target===overlay){
+
+        overlay.style.display="none";
+
+    }
+
+});
+
+// ==========================
+// VIDEO AUTOPLAY
+// ==========================
+
+const videoObserver = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+video.play().catch(()=>{});
+
+}else{
+
+video.pause();
+
+}
+
+});
+
+});
+
+videoObserver.observe(video);
+
+// ==========================
+// BUTTON GLOW
+// ==========================
+
+setInterval(()=>{
+
+openBtn.animate([
+
+{
+
+boxShadow:"0 0 0px #fff"
+
+},
+
+{
+
+boxShadow:"0 0 35px #ffffff"
+
+},
+
+{
+
+boxShadow:"0 0 0px #fff"
+
+}
+
+],{
+
+duration:1800
+
+});
+
+},1800);
+
+// ==========================
+// PARALLAX
+// ==========================
+
+window.addEventListener("scroll",()=>{
+
+const y=window.scrollY;
+
+document.body.style.backgroundPositionY=(y*0.2)+"px";
+
+});
+
+// ==========================
+// POPUP
+// ==========================
+
+function birthdayPopup(){
+
+const popup=document.createElement("div");
+
+popup.innerHTML="🎉 Happy Birthday ❤️";
+
+popup.style.position="fixed";
+
+popup.style.top="50%";
+
+popup.style.left="50%";
+
+popup.style.transform="translate(-50%,-50%)";
+
+popup.style.background="white";
+
+popup.style.color="#ff4f92";
+
+popup.style.padding="25px 40px";
+
+popup.style.borderRadius="20px";
+
+popup.style.fontSize="30px";
+
+popup.style.fontWeight="bold";
+
+popup.style.zIndex="999999";
+
+popup.style.boxShadow="0 20px 50px rgba(0,0,0,.3)";
+
+document.body.appendChild(popup);
+
+setTimeout(()=>{
+
+popup.remove();
+
+},2500);
+
+}
+
+openBtn.addEventListener("click",birthdayPopup);
+
+// ==========================
+// SPARKLE
+// ==========================
+
+function sparkle(){
+
+const star=document.createElement("div");
+
+star.innerHTML="✨";
+
+star.style.position="fixed";
+
+star.style.left=Math.random()*window.innerWidth+"px";
+
+star.style.top=Math.random()*window.innerHeight+"px";
+
+star.style.fontSize=(15+Math.random()*25)+"px";
+
+star.style.pointerEvents="none";
+
+star.style.transition="1.5s";
+
+document.body.appendChild(star);
+
+setTimeout(()=>{
+
+star.style.opacity="0";
+
+star.style.transform="translateY(-60px)";
+
+},100);
+
+setTimeout(()=>{
+
+star.remove();
+
+},1600);
+
+}
+
+openBtn.addEventListener("click",()=>{
+
+for(let i=0;i<80;i++){
+
+setTimeout(sparkle,i*30);
+
+}
+
+});
+
+// ==========================
+// LOVE MESSAGE
+// ==========================
+
+console.log(`
+❤️
+Happy Birthday
+Semoga selalu bahagia.
+Terima kasih sudah hadir.
+Aku sayang kamu ❤️
+`);
