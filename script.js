@@ -1,31 +1,39 @@
-// =========================
+// ==========================================
+// HAPPY BIRTHDAY PROJECT
+// SCRIPT.JS
+// BAGIAN 1
+// ==========================================
+
+// ==========================================
 // ELEMENT
-// =========================
+// ==========================================
 
 const loading = document.getElementById("loading");
+const hearts = document.getElementById("hearts");
+const bgMusic = document.getElementById("bgMusic");
 
 const openGift = document.getElementById("openGift");
 
-const bgMusic = document.getElementById("bgMusic");
-
-const hearts = document.getElementById("hearts");
-
 const cakeSection = document.getElementById("cakeSection");
-
 const videoSection = document.getElementById("videoSection");
-
 const gallerySection = document.getElementById("gallery");
-
 const letterSection = document.getElementById("letter");
-
 const replySection = document.getElementById("replySection");
-
 const endingSection = document.getElementById("ending");
 
+const cakeButton = document.getElementById("cakeButton");
 
-// =========================
+const layer1 = document.getElementById("layer1");
+const layer2 = document.getElementById("layer2");
+const layer3 = document.getElementById("layer3");
+
+const cream = document.getElementById("cream");
+const candle = document.getElementById("candle");
+const flame = document.getElementById("flame");
+
+// ==========================================
 // LOADING
-// =========================
+// ==========================================
 
 window.addEventListener("load", () => {
 
@@ -43,24 +51,23 @@ window.addEventListener("load", () => {
 
 });
 
-
-// =========================
+// ==========================================
 // FLOATING HEART
-// =========================
+// ==========================================
 
 function createHeart() {
 
     const heart = document.createElement("div");
 
+    const emoji = ["❤️", "💖", "💕", "💘"];
+
     heart.className = "heart";
 
-    const icons = ["❤️", "💕", "💖", "💘"];
-
-    heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+    heart.innerHTML = emoji[Math.floor(Math.random() * emoji.length)];
 
     heart.style.left = Math.random() * 100 + "vw";
 
-    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+    heart.style.fontSize = (15 + Math.random() * 20) + "px";
 
     heart.style.animationDuration = (4 + Math.random() * 4) + "s";
 
@@ -76,10 +83,9 @@ function createHeart() {
 
 setInterval(createHeart, 350);
 
-
-// =========================
+// ==========================================
 // OPEN GIFT
-// =========================
+// ==========================================
 
 openGift.addEventListener("click", () => {
 
@@ -94,19 +100,10 @@ openGift.addEventListener("click", () => {
     });
 
 });
-// =========================
-// CAKE LOGIC
-// =========================
 
-const cakeButton = document.getElementById("cakeButton");
-
-const layer1 = document.getElementById("layer1");
-const layer2 = document.getElementById("layer2");
-const layer3 = document.getElementById("layer3");
-
-const cream = document.getElementById("cream");
-const candle = document.getElementById("candle");
-const flame = document.getElementById("flame");
+// ==========================================
+// CAKE STEP
+// ==========================================
 
 let cakeStep = 0;
 
@@ -114,21 +111,21 @@ cakeButton.addEventListener("click", () => {
 
     switch (cakeStep) {
 
-        // =====================
-        // STEP 0
-        // MUNCULKAN KUE
-        // =====================
-
+        // STEP 1
         case 0:
 
             layer1.classList.remove("hidden");
 
             setTimeout(() => {
+
                 layer2.classList.remove("hidden");
+
             }, 500);
 
             setTimeout(() => {
+
                 layer3.classList.remove("hidden");
+
             }, 1000);
 
             cakeButton.textContent = "🧁 Tambahkan Cream";
@@ -137,11 +134,7 @@ cakeButton.addEventListener("click", () => {
 
             break;
 
-        // =====================
-        // STEP 1
-        // CREAM
-        // =====================
-
+        // STEP 2
         case 1:
 
             cream.classList.remove("hidden");
@@ -152,11 +145,7 @@ cakeButton.addEventListener("click", () => {
 
             break;
 
-        // =====================
-        // STEP 2
-        // LILIN
-        // =====================
-
+        // STEP 3
         case 2:
 
             candle.classList.remove("hidden");
@@ -166,17 +155,15 @@ cakeButton.addEventListener("click", () => {
             cakeStep++;
 
             break;
-
-        // =====================
-        // STEP 3
-        // TIUP LILIN
-        // =====================
+                    // ==========================
+        // STEP 4 - TIUP LILIN
+        // ==========================
 
         case 3:
 
             flame.style.opacity = "0";
 
-            flame.style.transform = "scale(0)";
+            flame.style.transform = "translateX(-50%) scale(0)";
 
             showPopup("🎉 Make A Wish ❤️");
 
@@ -188,10 +175,9 @@ cakeButton.addEventListener("click", () => {
 
             break;
 
-        // =====================
-        // STEP 4
-        // VIDEO
-        // =====================
+        // ==========================
+        // STEP 5 - VIDEO
+        // ==========================
 
         case 4:
 
@@ -205,14 +191,123 @@ cakeButton.addEventListener("click", () => {
 
             cakeButton.disabled = true;
 
+            cakeStep++;
+
             break;
 
     }
 
 });
-// =========================
+
+// ==========================================
+// POPUP
+// ==========================================
+
+function showPopup(text){
+
+    const popup = document.createElement("div");
+
+    popup.className = "pop";
+
+    popup.textContent = text;
+
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+
+        popup.remove();
+
+    },2500);
+
+}
+
+// ==========================================
+// CONFETTI
+// ==========================================
+
+const canvas = document.getElementById("confetti");
+
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+
+let animationId = null;
+
+function resizeCanvas(){
+
+    canvas.width = window.innerWidth;
+
+    canvas.height = window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener("resize",resizeCanvas);
+
+function createConfetti(){
+
+    particles = [];
+
+    for(let i=0;i<180;i++){
+
+        particles.push({
+
+            x:Math.random()*canvas.width,
+
+            y:Math.random()*-canvas.height,
+
+            r:Math.random()*5+2,
+
+            speed:Math.random()*4+2,
+
+            color:[
+                "#ff4f92",
+                "#ff8fab",
+                "#ffd1dc",
+                "#ffffff"
+            ][Math.floor(Math.random()*4)]
+
+        });
+
+    }
+
+    animateConfetti();
+
+    setTimeout(()=>{
+
+        cancelAnimationFrame(animationId);
+
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    },6000);
+
+}
+
+function animateConfetti(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    particles.forEach(p=>{
+
+        ctx.beginPath();
+
+        ctx.fillStyle=p.color;
+
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+
+        ctx.fill();
+
+        p.y+=p.speed;
+
+    });
+
+    animationId=requestAnimationFrame(animateConfetti);
+
+        }
+// ==========================================
 // NAVIGATION
-// =========================
+// ==========================================
 
 const nextGallery = document.getElementById("nextGallery");
 const nextLetter = document.getElementById("nextLetter");
@@ -241,6 +336,8 @@ nextLetter.addEventListener("click", () => {
 
     });
 
+    startTyping();
+
 });
 
 nextReply.addEventListener("click", () => {
@@ -266,24 +363,125 @@ nextEnding.addEventListener("click", () => {
     });
 
 });
-// =========================
-// POPUP
-// =========================
 
-function showPopup(text) {
 
-    const pop = document.createElement("div");
+// ==========================================
+// TYPING EFFECT
+// ==========================================
 
-    pop.className = "pop";
+const typing = document.getElementById("typing");
 
-    pop.textContent = text;
+const originalText = typing.textContent.trim();
 
-    document.body.appendChild(pop);
+typing.textContent = "";
 
-    setTimeout(() => {
+let typingIndex = 0;
 
-        pop.remove();
+let typingStarted = false;
 
-    }, 2500);
+function startTyping(){
+
+    if(typingStarted) return;
+
+    typingStarted = true;
+
+    function type(){
+
+        if(typingIndex < originalText.length){
+
+            typing.textContent += originalText.charAt(typingIndex);
+
+            typingIndex++;
+
+            setTimeout(type,35);
+
+        }
+
+    }
+
+    type();
 
 }
+
+
+// ==========================================
+// WHATSAPP
+// ==========================================
+
+const nomor = "6285184983950";
+
+const sendWA = document.getElementById("sendWA");
+
+const sendVideo = document.getElementById("sendVideo");
+
+const replyMessage = document.getElementById("replyMessage");
+
+function kirimWA(text){
+
+    window.open(
+
+        `https://wa.me/${nomor}?text=${encodeURIComponent(text)}`,
+
+        "_blank"
+
+    );
+
+}
+
+sendWA.addEventListener("click",()=>{
+
+    const pesan = replyMessage.value.trim();
+
+    if(!pesan){
+
+        alert("Tulis pesan dulu ya ❤️");
+
+        return;
+
+    }
+
+    kirimWA(pesan);
+
+});
+
+sendVideo.addEventListener("click",()=>{
+
+    const pesan = replyMessage.value.trim();
+
+    if(!pesan){
+
+        alert("Tulis pesan dulu ya ❤️");
+
+        return;
+
+    }
+
+    kirimWA(
+
+        pesan +
+
+        "\n\n📹 Aku juga mau video aslinya ya ❤️"
+
+    );
+
+});
+
+
+// ==========================================
+// REPLAY
+// ==========================================
+
+const replay = document.getElementById("replay");
+
+replay.addEventListener("click",()=>{
+
+    location.reload();
+
+});
+
+
+// ==========================================
+// FINISH
+// ==========================================
+
+console.log("Happy Birthday Project Loaded ❤️");
