@@ -1,9 +1,14 @@
 // =========================
 // ELEMENT
 // =========================
-const openBtn = document.getElementById("openGift");
-const replayBtn = document.getElementById("replay");
+
+const openGift = document.getElementById("openGift");
+const cakeSection = document.getElementById("cakeSection");
+const cakeButton = document.getElementById("cakeButton");
+const startCake = document.getElementById("startCake");
+
 const music = document.getElementById("bgMusic");
+const hearts = document.getElementById("hearts");
 
 // =========================
 // LOADING
@@ -28,60 +33,22 @@ window.addEventListener("load", () => {
 });
 
 // =========================
-// OPEN GIFT
-// =========================
-
-openBtn.addEventListener("click", () => {
-
-    music.play().catch(() => {});
-
-    document.querySelector(".video-section").scrollIntoView({
-
-        behavior: "smooth"
-
-    });
-
-    createConfetti();
-
-    birthdayPopup();
-
-});
-
-// =========================
-// REPLAY
-// =========================
-
-replayBtn.addEventListener("click", () => {
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
-});
-
-// =========================
 // FLOATING HEARTS
 // =========================
 
-const hearts = document.getElementById("hearts");
-
-function createHeart() {
+function createHeart(){
 
     const heart = document.createElement("div");
 
-    heart.className = "heart";
+    heart.classList.add("heart");
 
-    heart.innerHTML = ["❤","💖","💕","💗","💘"][Math.floor(Math.random()*5)];
+    heart.innerHTML = ["❤️","💖","💕","💘"][Math.floor(Math.random()*4)];
 
     heart.style.left = Math.random() * 100 + "vw";
 
-    heart.style.fontSize = (18 + Math.random() * 22) + "px";
+    heart.style.fontSize = (16 + Math.random()*20) + "px";
 
-    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    heart.style.animationDuration = (4 + Math.random()*5) + "s";
 
     hearts.appendChild(heart);
 
@@ -89,198 +56,147 @@ function createHeart() {
 
         heart.remove();
 
-    }, 10000);
+    }, 8000);
 
 }
 
 setInterval(createHeart, 300);
 
 // =========================
-// SCROLL ANIMATION
+// OPEN GIFT
 // =========================
 
-const sections = document.querySelectorAll("section");
+openGift.addEventListener("click", () => {
 
-const observer = new IntersectionObserver((entries)=>{
+    music.play().catch(()=>{});
 
-    entries.forEach(entry=>{
+    cakeSection.style.display = "block";
 
-        if(entry.isIntersecting){
+    cakeSection.scrollIntoView({ behavior: "smooth" });
 
-            entry.target.style.opacity="1";
-            entry.target.style.transform="translateY(0)";
+});
 
-        }
+// =========================
+// START CAKE
+// =========================
+
+startCake.addEventListener("click", () => {
+
+    cakeSection.scrollIntoView({ behavior: "smooth" });
+
+    document.getElementById("cakeBox").classList.add("show");
+
+});
+
+// =========================
+// CAKE BUTTON (STEP 1)
+// =========================
+
+cakeButton.addEventListener("click", () => {
+
+    document.getElementById("layer1").classList.remove("hidden");
+
+    setTimeout(() => {
+
+        document.getElementById("layer2").classList.remove("hidden");
+
+    }, 600);
+
+    setTimeout(() => {
+
+        document.getElementById("layer3").classList.remove("hidden");
+
+    }, 1200);
+
+});
+// =========================
+// CAKE CONTINUE (CREAM + CANDLE)
+// =========================
+
+const cream = document.getElementById("cream");
+const candle = document.getElementById("candle");
+const flame = document.getElementById("flame");
+
+setTimeout(() => {
+
+    cakeButton.addEventListener("click", () => {
+
+        // show cream
+        cream.classList.remove("hidden");
+
+        setTimeout(() => {
+
+            // show candle
+            candle.classList.remove("hidden");
+
+            cakeButton.textContent = "🕯 Tiup Lilin";
+
+            cakeButton.id = "blowButton";
+
+            enableBlow();
+
+        }, 800);
+
+    }, { once: true });
+
+}, 1000);
+
+// =========================
+// BLOW CANDLE
+// =========================
+
+function enableBlow(){
+
+    const blowButton = document.getElementById("blowButton");
+
+    blowButton.addEventListener("click", () => {
+
+        // blow effect
+        flame.style.opacity = "0";
+        flame.style.transform = "scale(0)";
+
+        // popup
+        showPopup("🎉 Make A Wish ❤️");
+
+        // confetti
+        createConfetti();
+
+        // change button
+        setTimeout(() => {
+
+            blowButton.textContent = "🎥 Lihat Hadiah";
+
+            blowButton.id = "toVideo";
+
+            goToVideo();
+
+        }, 1500);
 
     });
 
-});
-
-sections.forEach(sec=>{
-
-    sec.style.opacity="0";
-    sec.style.transform="translateY(70px)";
-    sec.style.transition="1s";
-
-    observer.observe(sec);
-
-});
-// =========================
-// TYPING EFFECT
-// =========================
-
-const typing = document.getElementById("typing");
-
-const message = typing.innerHTML;
-
-typing.innerHTML = "";
-
-let i = 0;
-
-function typeWriter(){
-
-    if(i < message.length){
-
-        typing.innerHTML += message.charAt(i);
-
-        i++;
-
-        setTimeout(typeWriter,35);
-
-    }
-
-}
-
-const typingObserver = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            if(i===0){
-
-                typeWriter();
-
-            }
-
-        }
-
-    });
-
-});
-
-typingObserver.observe(typing);
-
-// =========================
-// COUNTDOWN
-// UBAH TANGGAL JADIAN
-// Tahun, Bulan-1, Tanggal
-// =========================
-
-const startDate = new Date(2026,3,18);
-
-function updateTime(){
-
-    const now = new Date();
-
-    const diff = now - startDate;
-
-    const days = Math.floor(diff/(1000*60*60*24));
-
-    const hours = Math.floor(diff/(1000*60*60))%24;
-
-    const minutes = Math.floor(diff/(1000*60))%60;
-
-    const seconds = Math.floor(diff/1000)%60;
-
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours.toString().padStart(2,"0");
-    document.getElementById("minutes").textContent = minutes.toString().padStart(2,"0");
-    document.getElementById("seconds").textContent = seconds.toString().padStart(2,"0");
-
-}
-
-updateTime();
-
-setInterval(updateTime,1000);
-
-// =========================
-// POPUP
-// =========================
-
-function birthdayPopup(){
-
-    const popup=document.createElement("div");
-
-    popup.innerHTML="🎉 Happy Birthday ❤️";
-
-    popup.style.position="fixed";
-    popup.style.left="50%";
-    popup.style.top="50%";
-    popup.style.transform="translate(-50%,-50%)";
-    popup.style.background="#fff";
-    popup.style.color="#ff4f92";
-    popup.style.padding="20px 40px";
-    popup.style.borderRadius="20px";
-    popup.style.fontSize="30px";
-    popup.style.fontWeight="bold";
-    popup.style.zIndex="999999";
-    popup.style.boxShadow="0 15px 40px rgba(0,0,0,.25)";
-
-    document.body.appendChild(popup);
-
-    setTimeout(()=>{
-
-        popup.remove();
-
-    },2500);
-
 }
 
 // =========================
-// SPARKLE
+// POPUP FUNCTION
 // =========================
 
-function sparkle(){
+function showPopup(text){
 
-    const star=document.createElement("div");
+    const pop = document.createElement("div");
 
-    star.innerHTML="✨";
+    pop.className = "pop";
 
-    star.style.position="fixed";
-    star.style.left=Math.random()*window.innerWidth+"px";
-    star.style.top=Math.random()*window.innerHeight+"px";
-    star.style.fontSize=(15+Math.random()*20)+"px";
-    star.style.pointerEvents="none";
-    star.style.transition="1.5s";
-    star.style.zIndex="99999";
+    pop.innerText = text;
 
-    document.body.appendChild(star);
+    document.body.appendChild(pop);
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
-        star.style.opacity="0";
-        star.style.transform="translateY(-60px)";
+        pop.remove();
 
-    },100);
+    }, 2500);
 
-    setTimeout(()=>{
-
-        star.remove();
-
-    },1600);
-
-}
-
-openBtn.addEventListener("click",()=>{
-
-    for(let j=0;j<80;j++){
-
-        setTimeout(sparkle,j*30);
-
-    }
-
-});
+                          }
 // =========================
 // CONFETTI
 // =========================
@@ -293,38 +209,23 @@ canvas.height = window.innerHeight;
 
 let particles = [];
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-
-window.addEventListener("resize", resizeCanvas);
-
-function createConfetti() {
+function createConfetti(){
 
     particles = [];
 
-    for (let i = 0; i < 180; i++) {
+    for(let i=0;i<150;i++){
 
         particles.push({
 
-            x: Math.random() * canvas.width,
+            x: Math.random()*canvas.width,
 
-            y: Math.random() * -canvas.height,
+            y: Math.random()*-canvas.height,
 
-            r: Math.random() * 6 + 4,
+            r: Math.random()*6+2,
 
-            dx: (Math.random() - 0.5) * 3,
+            d: Math.random()*2+1,
 
-            dy: Math.random() * 3 + 2,
-
-            color: [
-                "#ff4f92",
-                "#ff85b3",
-                "#ffd166",
-                "#ffffff",
-                "#ffb6c1"
-            ][Math.floor(Math.random() * 5)]
+            color: ["#ff4f92","#fff","#ffd1dc","#ffb6c1"][Math.floor(Math.random()*4)]
 
         });
 
@@ -334,23 +235,27 @@ function createConfetti() {
 
 }
 
-function animateConfetti() {
+function animateConfetti(){
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    particles.forEach(p=>{
+    particles.forEach(p => {
 
         ctx.beginPath();
+
+        ctx.fillStyle = p.color;
+
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle=p.color;
+
         ctx.fill();
 
-        p.x += p.dx;
-        p.y += p.dy;
+        p.y += p.d;
 
         if(p.y > canvas.height){
 
-            p.y = -10;
+            p.y = 0;
+
+            p.x = Math.random()*canvas.width;
 
         }
 
@@ -361,80 +266,128 @@ function animateConfetti() {
 }
 
 // =========================
-// GALLERY LIGHTBOX
+// GO TO VIDEO
 // =========================
 
-const imgs = document.querySelectorAll(".gallery-grid img");
+function goToVideo(){
 
-const lightbox = document.createElement("div");
+    const btn = document.getElementById("toVideo");
 
-lightbox.id = "lightbox";
+    btn.addEventListener("click", () => {
 
-lightbox.innerHTML = `
-<span id="closeLightbox">&times;</span>
-<img id="lightboxImage">
-`;
+        document.getElementById("videoSection").style.display = "block";
 
-document.body.appendChild(lightbox);
+        document.getElementById("videoSection").scrollIntoView({
 
-const lightboxImg = document.getElementById("lightboxImage");
+            behavior:"smooth"
 
-imgs.forEach(img=>{
-
-    img.onclick = ()=>{
-
-        lightbox.style.display="flex";
-
-        lightboxImg.src = img.src;
-
-    }
-
-});
-
-lightbox.onclick = (e)=>{
-
-    if(e.target===lightbox || e.target.id==="closeLightbox"){
-
-        lightbox.style.display="none";
-
-    }
-
-};
-
-// =========================
-// BUTTON GLOW
-// =========================
-
-setInterval(()=>{
-
-    openBtn.animate([
-
-        {transform:"scale(1)"},
-        {transform:"scale(1.08)"},
-        {transform:"scale(1)"}
-
-    ],{
-
-        duration:1800
+        });
 
     });
 
-},1800);
+}
 
 // =========================
-// PARALLAX
+// TYPING LETTER
 // =========================
 
-window.addEventListener("scroll",()=>{
+const typing = document.getElementById("typing");
 
-    document.body.style.backgroundPositionY =
-    -(window.scrollY*0.2)+"px";
+if(typing){
+
+    const text = typing.innerText;
+
+    typing.innerText = "";
+
+    let i = 0;
+
+    function type(){
+
+        if(i < text.length){
+
+            typing.innerText += text[i];
+
+            i++;
+
+            setTimeout(type, 30);
+
+        }
+
+    }
+
+    setTimeout(type, 1000);
+
+}
+
+// =========================
+// WHATSAPP
+// =========================
+
+const sendWA = document.getElementById("sendWA");
+const sendVideo = document.getElementById("sendVideo");
+
+const nomor = "6285184983950";
+
+sendWA.addEventListener("click", () => {
+
+    const msg = document.getElementById("replyMessage").value.trim();
+
+    if(!msg){
+
+        alert("Tulis pesan dulu ya ❤️");
+
+        return;
+
+    }
+
+    window.open(
+
+        `https://wa.me/${nomor}?text=${encodeURIComponent(msg)}`,
+
+        "_blank"
+
+    );
+
+});
+
+sendVideo.addEventListener("click", () => {
+
+    const msg = document.getElementById("replyMessage").value.trim();
+
+    if(!msg){
+
+        alert("Tulis pesan dulu ya ❤️");
+
+        return;
+
+    }
+
+    const finalMsg = `${msg}
+
+📹 Aku juga mau video aslinya ya sayang ❤️`;
+
+    window.open(
+
+        `https://wa.me/${nomor}?text=${encodeURIComponent(finalMsg)}`,
+
+        "_blank"
+
+    );
 
 });
 
 // =========================
-// END
+// REPLAY
 // =========================
 
-console.log("❤️ Happy Birthday ❤️");
-console.log("Website by Farel");
+const replay = document.getElementById("replay");
+
+if(replay){
+
+    replay.addEventListener("click", () => {
+
+        location.reload();
+
+    });
+
+        }
