@@ -1,158 +1,152 @@
-// ==========================
-// Loading Screen
-// ==========================
+// =========================
+// ELEMENT
+// =========================
+
+const openBtn = document.getElementById("openGift");
+const replayBtn = document.getElementById("replay");
+const music = document.getElementById("bgMusic");
+
+// =========================
+// LOADING
+// =========================
 
 window.addEventListener("load", () => {
 
+    const loading = document.getElementById("loading");
+
     setTimeout(() => {
 
-        document.getElementById("loading").style.opacity = "0";
+        loading.style.opacity = "0";
 
         setTimeout(() => {
 
-            document.getElementById("loading").style.display = "none";
+            loading.style.display = "none";
 
-        },800);
+        }, 800);
 
-    },1800);
+    }, 1500);
 
 });
 
-// ==========================
-// Element
-// ==========================
+// =========================
+// OPEN GIFT
+// =========================
 
-const openBtn = document.getElementById("openGift");
-const music = document.getElementById("bgMusic");
-const video = document.getElementById("birthdayVideo");
-const replay = document.getElementById("replay");
+openBtn.addEventListener("click", () => {
 
-// ==========================
-// Open Gift
-// ==========================
-
-openBtn.addEventListener("click",()=>{
-
-    music.play().catch(()=>{});
+    music.play().catch(() => {});
 
     document.querySelector(".video-section").scrollIntoView({
 
-        behavior:"smooth"
+        behavior: "smooth"
 
     });
 
-    setTimeout(()=>{
+    createConfetti();
 
-        video.play().catch(()=>{});
-
-    },700);
+    birthdayPopup();
 
 });
 
-// ==========================
-// Replay
-// ==========================
+// =========================
+// REPLAY
+// =========================
 
-replay.addEventListener("click",()=>{
+replayBtn.addEventListener("click", () => {
 
     window.scrollTo({
 
-        top:0,
+        top: 0,
 
-        behavior:"smooth"
+        behavior: "smooth"
 
     });
 
-    video.currentTime=0;
-
 });
 
-// ==========================
-// Floating Hearts
-// ==========================
+// =========================
+// FLOATING HEARTS
+// =========================
 
 const hearts = document.getElementById("hearts");
 
-function createHeart(){
+function createHeart() {
 
     const heart = document.createElement("div");
 
-    heart.className="heart";
+    heart.className = "heart";
 
-    heart.innerHTML="❤";
+    heart.innerHTML = ["❤","💖","💕","💗","💘"][Math.floor(Math.random()*5)];
 
-    heart.style.left=Math.random()*100+"vw";
+    heart.style.left = Math.random() * 100 + "vw";
 
-    heart.style.fontSize=(20+Math.random()*25)+"px";
+    heart.style.fontSize = (18 + Math.random() * 22) + "px";
 
-    heart.style.animationDuration=(5+Math.random()*5)+"s";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
 
     hearts.appendChild(heart);
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
         heart.remove();
 
-    },10000);
+    }, 10000);
 
 }
 
-setInterval(createHeart,300);
+setInterval(createHeart, 300);
 
-// ==========================
-// Scroll Animation
-// ==========================
+// =========================
+// SCROLL ANIMATION
+// =========================
 
-const sections=document.querySelectorAll("section");
+const sections = document.querySelectorAll("section");
 
-const observer=new IntersectionObserver((entries)=>{
+const observer = new IntersectionObserver((entries)=>{
 
-entries.forEach(entry=>{
+    entries.forEach(entry=>{
 
-if(entry.isIntersecting){
+        if(entry.isIntersecting){
 
-entry.target.style.opacity="1";
+            entry.target.style.opacity="1";
+            entry.target.style.transform="translateY(0)";
 
-entry.target.style.transform="translateY(0)";
+        }
 
-}
-
-});
+    });
 
 });
 
 sections.forEach(sec=>{
 
-sec.style.opacity="0";
+    sec.style.opacity="0";
+    sec.style.transform="translateY(70px)";
+    sec.style.transition="1s";
 
-sec.style.transform="translateY(60px)";
-
-sec.style.transition=".8s";
-
-observer.observe(sec);
+    observer.observe(sec);
 
 });
-// ==========================
+// =========================
 // TYPING EFFECT
-// ==========================
+// =========================
 
 const typing = document.getElementById("typing");
 
-const fullText = typing.innerText;
+const message = typing.innerHTML;
 
-typing.innerText = "";
+typing.innerHTML = "";
 
-let index = 0;
+let i = 0;
 
-function typeLetter(){
+function typeWriter(){
 
-    if(index < fullText.length){
+    if(i < message.length){
 
-        typing.innerHTML += fullText.charAt(index);
+        typing.innerHTML += message.charAt(i);
 
-        index++;
+        i++;
 
-        setTimeout(typeLetter,45);
+        setTimeout(typeWriter,35);
 
     }
 
@@ -164,9 +158,9 @@ const typingObserver = new IntersectionObserver((entries)=>{
 
         if(entry.isIntersecting){
 
-            if(index===0){
+            if(i===0){
 
-                typeLetter();
+                typeWriter();
 
             }
 
@@ -178,359 +172,270 @@ const typingObserver = new IntersectionObserver((entries)=>{
 
 typingObserver.observe(typing);
 
-// ==========================
+// =========================
 // COUNTDOWN
-// Ganti tanggal sesuai hari jadian
-// Format: Tahun, Bulan-1, Tanggal
-// ==========================
+// UBAH TANGGAL JADIAN
+// Tahun, Bulan-1, Tanggal
+// =========================
 
-const startDate = new Date(2025, 6, 15);
+const startDate = new Date(2025,6,15);
 
-function updateCounter(){
+function updateTime(){
 
     const now = new Date();
 
     const diff = now - startDate;
 
-    const days = Math.floor(diff / (1000*60*60*24));
+    const days = Math.floor(diff/(1000*60*60*24));
 
-    const hours = now.getHours();
+    const hours = Math.floor(diff/(1000*60*60))%24;
 
-    const minutes = now.getMinutes();
+    const minutes = Math.floor(diff/(1000*60))%60;
 
-    const seconds = now.getSeconds();
+    const seconds = Math.floor(diff/1000)%60;
 
-    document.getElementById("days").innerHTML = days;
-
-    document.getElementById("hours").innerHTML =
-        String(hours).padStart(2,"0");
-
-    document.getElementById("minutes").innerHTML =
-        String(minutes).padStart(2,"0");
-
-    document.getElementById("seconds").innerHTML =
-        String(seconds).padStart(2,"0");
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours.toString().padStart(2,"0");
+    document.getElementById("minutes").textContent = minutes.toString().padStart(2,"0");
+    document.getElementById("seconds").textContent = seconds.toString().padStart(2,"0");
 
 }
 
-updateCounter();
+updateTime();
 
-setInterval(updateCounter,1000);
+setInterval(updateTime,1000);
 
-// ==========================
+// =========================
+// POPUP
+// =========================
+
+function birthdayPopup(){
+
+    const popup=document.createElement("div");
+
+    popup.innerHTML="🎉 Happy Birthday ❤️";
+
+    popup.style.position="fixed";
+    popup.style.left="50%";
+    popup.style.top="50%";
+    popup.style.transform="translate(-50%,-50%)";
+    popup.style.background="#fff";
+    popup.style.color="#ff4f92";
+    popup.style.padding="20px 40px";
+    popup.style.borderRadius="20px";
+    popup.style.fontSize="30px";
+    popup.style.fontWeight="bold";
+    popup.style.zIndex="999999";
+    popup.style.boxShadow="0 15px 40px rgba(0,0,0,.25)";
+
+    document.body.appendChild(popup);
+
+    setTimeout(()=>{
+
+        popup.remove();
+
+    },2500);
+
+}
+
+// =========================
+// SPARKLE
+// =========================
+
+function sparkle(){
+
+    const star=document.createElement("div");
+
+    star.innerHTML="✨";
+
+    star.style.position="fixed";
+    star.style.left=Math.random()*window.innerWidth+"px";
+    star.style.top=Math.random()*window.innerHeight+"px";
+    star.style.fontSize=(15+Math.random()*20)+"px";
+    star.style.pointerEvents="none";
+    star.style.transition="1.5s";
+    star.style.zIndex="99999";
+
+    document.body.appendChild(star);
+
+    setTimeout(()=>{
+
+        star.style.opacity="0";
+        star.style.transform="translateY(-60px)";
+
+    },100);
+
+    setTimeout(()=>{
+
+        star.remove();
+
+    },1600);
+
+}
+
+openBtn.addEventListener("click",()=>{
+
+    for(let j=0;j<80;j++){
+
+        setTimeout(sparkle,j*30);
+
+    }
+
+});
+// =========================
 // CONFETTI
-// ==========================
+// =========================
 
 const canvas = document.getElementById("confetti");
-
 const ctx = canvas.getContext("2d");
 
 canvas.width = window.innerWidth;
-
 canvas.height = window.innerHeight;
 
-let confetti = [];
+let particles = [];
 
-function random(min,max){
-
-    return Math.random()*(max-min)+min;
-
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 }
 
-function createConfetti(){
+window.addEventListener("resize", resizeCanvas);
 
-    confetti = [];
+function createConfetti() {
 
-    for(let i=0;i<180;i++){
+    particles = [];
 
-        confetti.push({
+    for (let i = 0; i < 180; i++) {
 
-            x:random(0,canvas.width),
+        particles.push({
 
-            y:random(-canvas.height,0),
+            x: Math.random() * canvas.width,
 
-            r:random(4,9),
+            y: Math.random() * -canvas.height,
 
-            d:random(2,6),
+            r: Math.random() * 6 + 4,
 
-            color:[
-                "#ff5fa2",
-                "#ff99cc",
-                "#ffffff",
+            dx: (Math.random() - 0.5) * 3,
+
+            dy: Math.random() * 3 + 2,
+
+            color: [
+                "#ff4f92",
+                "#ff85b3",
                 "#ffd166",
-                "#ff6b6b"
-            ][Math.floor(Math.random()*5)]
+                "#ffffff",
+                "#ffb6c1"
+            ][Math.floor(Math.random() * 5)]
 
         });
 
     }
 
+    animateConfetti();
+
 }
 
-function drawConfetti(){
+function animateConfetti() {
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    confetti.forEach(c=>{
+    particles.forEach(p=>{
 
         ctx.beginPath();
-
-        ctx.fillStyle=c.color;
-
-        ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
-
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=p.color;
         ctx.fill();
 
-        c.y += c.d;
+        p.x += p.dx;
+        p.y += p.dy;
 
-        if(c.y > canvas.height){
+        if(p.y > canvas.height){
 
-            c.y = -20;
+            p.y = -10;
 
         }
 
     });
 
-    requestAnimationFrame(drawConfetti);
+    requestAnimationFrame(animateConfetti);
 
 }
 
-openBtn.addEventListener("click",()=>{
+// =========================
+// GALLERY LIGHTBOX
+// =========================
 
-    createConfetti();
+const imgs = document.querySelectorAll(".gallery-grid img");
 
-    drawConfetti();
+const lightbox = document.createElement("div");
 
-});
+lightbox.id = "lightbox";
 
-window.addEventListener("resize",()=>{
-
-    canvas.width = window.innerWidth;
-
-    canvas.height = window.innerHeight;
-
-});
-// ==========================
-// LIGHTBOX GALLERY
-// ==========================
-
-const images = document.querySelectorAll(".gallery-grid img");
-
-const overlay = document.createElement("div");
-overlay.id = "lightbox";
-
-overlay.innerHTML = `
-    <span id="closeLightbox">&times;</span>
-    <img id="lightboxImage">
+lightbox.innerHTML = `
+<span id="closeLightbox">&times;</span>
+<img id="lightboxImage">
 `;
 
-document.body.appendChild(overlay);
+document.body.appendChild(lightbox);
 
-const lightboxImage = document.getElementById("lightboxImage");
-const closeLightbox = document.getElementById("closeLightbox");
+const lightboxImg = document.getElementById("lightboxImage");
 
-images.forEach(img=>{
+imgs.forEach(img=>{
 
-    img.addEventListener("click",()=>{
+    img.onclick = ()=>{
 
-        overlay.style.display="flex";
+        lightbox.style.display="flex";
 
-        lightboxImage.src=img.src;
-
-    });
-
-});
-
-closeLightbox.addEventListener("click",()=>{
-
-    overlay.style.display="none";
-
-});
-
-overlay.addEventListener("click",(e)=>{
-
-    if(e.target===overlay){
-
-        overlay.style.display="none";
+        lightboxImg.src = img.src;
 
     }
 
 });
 
-// ==========================
-// VIDEO AUTOPLAY
-// ==========================
+lightbox.onclick = (e)=>{
 
-const videoObserver = new IntersectionObserver((entries)=>{
+    if(e.target===lightbox || e.target.id==="closeLightbox"){
 
-entries.forEach(entry=>{
+        lightbox.style.display="none";
 
-if(entry.isIntersecting){
+    }
 
-video.play().catch(()=>{});
+};
 
-}else{
-
-video.pause();
-
-}
-
-});
-
-});
-
-videoObserver.observe(video);
-
-// ==========================
+// =========================
 // BUTTON GLOW
-// ==========================
+// =========================
 
 setInterval(()=>{
 
-openBtn.animate([
+    openBtn.animate([
 
-{
+        {transform:"scale(1)"},
+        {transform:"scale(1.08)"},
+        {transform:"scale(1)"}
 
-boxShadow:"0 0 0px #fff"
+    ],{
 
-},
+        duration:1800
 
-{
-
-boxShadow:"0 0 35px #ffffff"
-
-},
-
-{
-
-boxShadow:"0 0 0px #fff"
-
-}
-
-],{
-
-duration:1800
-
-});
+    });
 
 },1800);
 
-// ==========================
+// =========================
 // PARALLAX
-// ==========================
+// =========================
 
 window.addEventListener("scroll",()=>{
 
-const y=window.scrollY;
-
-document.body.style.backgroundPositionY=(y*0.2)+"px";
-
-});
-
-// ==========================
-// POPUP
-// ==========================
-
-function birthdayPopup(){
-
-const popup=document.createElement("div");
-
-popup.innerHTML="🎉 Happy Birthday ❤️";
-
-popup.style.position="fixed";
-
-popup.style.top="50%";
-
-popup.style.left="50%";
-
-popup.style.transform="translate(-50%,-50%)";
-
-popup.style.background="white";
-
-popup.style.color="#ff4f92";
-
-popup.style.padding="25px 40px";
-
-popup.style.borderRadius="20px";
-
-popup.style.fontSize="30px";
-
-popup.style.fontWeight="bold";
-
-popup.style.zIndex="999999";
-
-popup.style.boxShadow="0 20px 50px rgba(0,0,0,.3)";
-
-document.body.appendChild(popup);
-
-setTimeout(()=>{
-
-popup.remove();
-
-},2500);
-
-}
-
-openBtn.addEventListener("click",birthdayPopup);
-
-// ==========================
-// SPARKLE
-// ==========================
-
-function sparkle(){
-
-const star=document.createElement("div");
-
-star.innerHTML="✨";
-
-star.style.position="fixed";
-
-star.style.left=Math.random()*window.innerWidth+"px";
-
-star.style.top=Math.random()*window.innerHeight+"px";
-
-star.style.fontSize=(15+Math.random()*25)+"px";
-
-star.style.pointerEvents="none";
-
-star.style.transition="1.5s";
-
-document.body.appendChild(star);
-
-setTimeout(()=>{
-
-star.style.opacity="0";
-
-star.style.transform="translateY(-60px)";
-
-},100);
-
-setTimeout(()=>{
-
-star.remove();
-
-},1600);
-
-}
-
-openBtn.addEventListener("click",()=>{
-
-for(let i=0;i<80;i++){
-
-setTimeout(sparkle,i*30);
-
-}
+    document.body.style.backgroundPositionY =
+    -(window.scrollY*0.2)+"px";
 
 });
 
-// ==========================
-// LOVE MESSAGE
-// ==========================
+// =========================
+// END
+// =========================
 
-console.log(`
-❤️
-Happy Birthday
-Semoga selalu bahagia.
-Terima kasih sudah hadir.
-Aku sayang kamu ❤️
-`);
+console.log("❤️ Happy Birthday ❤️");
+console.log("Website by Farel");
