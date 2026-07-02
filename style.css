@@ -1,0 +1,718 @@
+/* ===========================
+   RESET
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:linear-gradient(135deg,#ff9ec4,#ffd6e8,#ffeef5);
+
+    overflow-x:hidden;
+
+    color:white;
+
+}
+
+/* ===========================
+   LOADING
+=========================== */
+
+#loading{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#ff8ab6;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+    transition:.8s;
+
+}
+
+#loading h1{
+
+    font-size:2rem;
+
+    animation:pulse 1s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.1);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.hero{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:30px;
+
+text-align:center;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+/* ===========================
+   GLASS CARD
+=========================== */
+
+.glass{
+
+width:100%;
+
+max-width:650px;
+
+padding:50px;
+
+border-radius:30px;
+
+background:rgba(255,255,255,.18);
+
+backdrop-filter:blur(20px);
+
+-webkit-backdrop-filter:blur(20px);
+
+box-shadow:
+
+0 20px 40px rgba(0,0,0,.15);
+
+border:1px solid rgba(255,255,255,.4);
+
+animation:fadeUp 1.2s ease;
+
+}
+
+.glass h3{
+
+font-weight:300;
+
+font-size:22px;
+
+margin-bottom:20px;
+
+}
+
+.glass h1{
+
+font-family:'Great Vibes',cursive;
+
+font-size:70px;
+
+margin-bottom:10px;
+
+}
+
+.glass h2{
+
+font-size:40px;
+
+margin-bottom:20px;
+
+color:#fff;
+
+}
+
+.glass p{
+
+font-size:18px;
+
+line-height:1.8;
+
+margin-bottom:35px;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+button{
+
+padding:18px 40px;
+
+border:none;
+
+border-radius:50px;
+
+font-size:18px;
+
+cursor:pointer;
+
+background:white;
+
+color:#ff4f92;
+
+font-weight:bold;
+
+transition:.35s;
+
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+button:hover{
+
+transform:translateY(-6px);
+
+background:#ff4f92;
+
+color:white;
+
+}
+
+/* ===========================
+   SECTION
+=========================== */
+
+section{
+
+padding:90px 25px;
+
+text-align:center;
+
+}
+
+section h2{
+
+font-size:42px;
+
+margin-bottom:15px;
+
+}
+
+.subtitle{
+
+font-size:20px;
+
+opacity:.95;
+
+}
+
+/* ===========================
+   FLOATING HEARTS
+=========================== */
+
+#hearts{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+overflow:hidden;
+
+z-index:-1;
+
+}
+
+.heart{
+
+position:absolute;
+
+color:white;
+
+font-size:22px;
+
+animation:floatHeart linear forwards;
+
+opacity:.75;
+
+}
+
+@keyframes floatHeart{
+
+0%{
+
+transform:
+
+translateY(100vh)
+
+scale(.6);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:
+
+translateY(-120px)
+
+scale(1.3);
+
+opacity:0;
+
+}
+
+}
+
+/* ===========================
+   VIDEO
+=========================== */
+
+.video-section{
+
+padding-top:80px;
+
+}
+
+.video-box{
+
+max-width:900px;
+
+margin:auto;
+
+background:white;
+
+padding:12px;
+
+border-radius:25px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.2);
+
+}
+
+video{
+
+width:100%;
+
+border-radius:20px;
+
+display:block;
+
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(70px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+/* ===========================
+   GALLERY
+=========================== */
+
+.gallery{
+    padding:100px 20px;
+}
+
+.gallery-grid{
+    max-width:1100px;
+    margin:50px auto 0;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.gallery-grid img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    border-radius:22px;
+    transition:.4s;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.gallery-grid img:hover{
+    transform:scale(1.06) rotate(2deg);
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+/* ===========================
+   LOVE LETTER
+=========================== */
+
+.letter{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.glass-letter{
+
+    width:100%;
+    max-width:850px;
+
+    padding:50px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.4);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+}
+
+.glass-letter h2{
+    margin-bottom:30px;
+}
+
+.glass-letter p{
+
+    white-space:pre-line;
+
+    line-height:2;
+
+    font-size:18px;
+
+}
+
+/* ===========================
+   COUNTDOWN
+=========================== */
+
+.countdown{
+
+padding:100px 20px;
+
+}
+
+.time-box{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:25px;
+
+margin-top:45px;
+
+}
+
+.time-box div{
+
+width:150px;
+
+padding:30px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.2);
+
+backdrop-filter:blur(15px);
+
+box-shadow:0 15px 30px rgba(0,0,0,.15);
+
+transition:.3s;
+
+}
+
+.time-box div:hover{
+
+transform:translateY(-10px);
+
+}
+
+.time-box h1{
+
+font-size:55px;
+
+}
+
+.time-box p{
+
+margin-top:12px;
+
+font-size:18px;
+
+}
+
+/* ===========================
+   ENDING
+=========================== */
+
+.ending{
+
+padding:120px 20px;
+
+}
+
+.ending h1{
+
+font-family:'Great Vibes',cursive;
+
+font-size:75px;
+
+margin-bottom:30px;
+
+}
+
+.ending p{
+
+max-width:750px;
+
+margin:auto;
+
+line-height:2;
+
+font-size:20px;
+
+margin-bottom:45px;
+
+}
+
+/* ===========================
+   CONFETTI
+=========================== */
+
+#confetti{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+z-index:999;
+
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#ffd5e6;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#ff6ea8;
+
+border-radius:20px;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+.glass{
+
+padding:35px;
+
+}
+
+.glass h1{
+
+font-size:55px;
+
+}
+
+.glass h2{
+
+font-size:32px;
+
+}
+
+.glass p{
+
+font-size:16px;
+
+}
+
+section h2{
+
+font-size:34px;
+
+}
+
+.ending h1{
+
+font-size:60px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.glass{
+
+padding:28px 20px;
+
+}
+
+.glass h1{
+
+font-size:45px;
+
+}
+
+.glass h2{
+
+font-size:26px;
+
+}
+
+.glass h3{
+
+font-size:18px;
+
+}
+
+button{
+
+width:100%;
+
+font-size:17px;
+
+}
+
+.gallery-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.gallery-grid img{
+
+height:250px;
+
+}
+
+.time-box{
+
+gap:15px;
+
+}
+
+.time-box div{
+
+width:120px;
+
+padding:20px;
+
+}
+
+.time-box h1{
+
+font-size:40px;
+
+}
+
+.glass-letter{
+
+padding:30px 20px;
+
+}
+
+.glass-letter p{
+
+font-size:16px;
+
+}
+
+.ending h1{
+
+font-size:48px;
+
+}
+
+.ending p{
+
+font-size:17px;
+
+}
+
+  }
