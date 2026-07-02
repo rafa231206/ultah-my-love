@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Happy Birthday ❤️</title>
 
     <!-- CSS -->
@@ -60,10 +59,22 @@
             </h2>
 
             <p>
-                Selamat ulang tahun ya ❤️ <br>
-                Aku sudah menyiapkan sebuah hadiah kecil khusus untukmu.
-                Semoga semua yang akan kamu lihat hari ini bisa membuatmu
-                tersenyum dan menjadi kenangan yang indah.
+                Selamat ulang tahun ya ❤️
+                <br><br>
+
+                Hari ini adalah hari yang sangat spesial.
+                Aku sudah menyiapkan sebuah hadiah kecil yang dibuat dengan penuh perhatian.
+
+                <br><br>
+
+                Semoga setiap langkah yang kamu lalui selalu dipenuhi kebahagiaan,
+                kesehatan, rezeki yang melimpah, dan orang-orang yang selalu
+                menyayangimu.
+
+                <br><br>
+
+                Sekarang...
+                tekan tombol di bawah ini ya ❤️
             </p>
 
             <button id="openGift">
@@ -73,257 +84,273 @@
         </div>
 
     </section>
-
-    <!-- =========================
+        <!-- =========================
          CAKE SECTION
-         (LANJUT BAGIAN 2)
     ========================== -->
-    <!-- =========================
-     CAKE SECTION
-========================= -->
 
-<section id="cakeSection" class="hidden-section">
+    <section id="cakeSection" class="hidden-section">
 
-    <div class="glass">
+        <div class="glass">
 
-        <h2>🎂 Make A Wish 🎂</h2>
+            <h2>🎂 Make A Wish 🎂</h2>
 
-        <p>
-            Sebelum melihat hadiah utamanya...
-            <br>
-            Yuk buat permohonan terbaikmu terlebih dahulu ❤️
-        </p>
+            <p>
+                Sebelum membuka hadiah utamanya,
+                buatlah satu permohonan terbaikmu terlebih dahulu. ❤️
+            </p>
 
-        <!-- Cake Container -->
-        <div id="cakeBox">
+            <!-- Cake -->
 
-            <!-- Layer 1 -->
-            <div id="layer1" class="cake-layer hidden"></div>
+            <div id="cakeBox">
 
-            <!-- Layer 2 -->
-            <div id="layer2" class="cake-layer hidden"></div>
+                <!-- Layer 1 -->
+                <div id="layer1" class="cake-layer hidden"></div>
 
-            <!-- Layer 3 -->
-            <div id="layer3" class="cake-layer hidden"></div>
+                <!-- Layer 2 -->
+                <div id="layer2" class="cake-layer hidden"></div>
 
-            <!-- Cream -->
-            <div id="cream" class="hidden"></div>
+                <!-- Layer 3 -->
+                <div id="layer3" class="cake-layer hidden"></div>
 
-            <!-- Candle -->
-            <div id="candle" class="hidden">
+                <!-- Cream -->
+                <div id="cream" class="hidden"></div>
 
-                <div id="flame"></div>
+                <!-- Candle -->
+                <div id="candle" class="hidden">
+
+                    <div id="flame"></div>
+
+                </div>
 
             </div>
 
+            <button id="cakeButton" data-step="0">
+                🍰 Munculkan Kue
+            </button>
+
         </div>
 
-        <!-- Button -->
-        <button id="cakeButton" data-step="0">
-            🍰 Munculkan Kue
-        </button>
+    </section>
 
-    </div>
+    <!-- =========================
+         VIDEO SECTION
+    ========================== -->
 
-</section>
-<!-- =========================
-     VIDEO SECTION
-========================= -->
+    <section id="videoSection" class="hidden-section">
 
-<section id="videoSection" class="hidden-section">
+        <div class="glass">
 
-    <div class="glass">
+            <h2>❤️ Happy Birthday ❤️</h2>
 
-        <h2>❤️ Happy Birthday ❤️</h2>
+            <p>
+                Ini hadiah kecil dariku.
+                <br><br>
+                Semoga bisa membuatmu tersenyum hari ini. ❤️
+            </p>
 
-        <p>
-            Ini hadiah kecil dariku untukmu.
+            <div class="video-box">
+
+                <iframe
+                    id="birthdayVideo"
+                    src="https://player.cloudinary.com/embed/?cloud_name=ozf0nwgq&public_id=lv_7634068236329405697_20260703034109_twqnpi"
+                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
             <br>
-            Semoga kamu menyukainya. ❤️
-        </p>
 
-        <div class="video-box">
-
-            <iframe
-                id="birthdayVideo"
-                src="https://player.cloudinary.com/embed/?cloud_name=ozf0nwgq&public_id=lv_7634068236329405697_20260703034109_twqnpi"
-                allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+            <button id="nextGallery">
+                📸 Lihat Galeri
+            </button>
 
         </div>
 
-        <br>
+    </section>
 
-        <button id="nextGallery">
-            📸 Lihat Galeri
-        </button>
+    <!-- =========================
+         GALLERY SECTION
+    ========================== -->
 
-    </div>
+    <section id="gallery" class="hidden-section">
 
-</section>
+        <div class="glass">
 
-<!-- =========================
-     GALLERY SECTION
-========================= -->
+            <h2>📸 Our Memories</h2>
 
-<section id="gallery" class="hidden-section">
+            <p>
+                Setiap foto memiliki cerita.
+                <br>
+                Terima kasih sudah menjadi bagian dari perjalanan indah ini. ❤️
+            </p>
 
-    <div class="glass">
+            <div class="gallery-grid">
 
-        <h2>📸 Our Memories</h2>
+                <img src="assets/photos/1.jpg" alt="Foto 1" loading="lazy">
 
-        <p>
-            Setiap foto memiliki cerita.
+                <img src="assets/photos/2.jpg" alt="Foto 2" loading="lazy">
+
+                <img src="assets/photos/3.jpg" alt="Foto 3" loading="lazy">
+
+                <img src="assets/photos/4.jpg" alt="Foto 4" loading="lazy">
+
+                <img src="assets/photos/5.jpg" alt="Foto 5" loading="lazy">
+
+                <img src="assets/photos/6.jpg" alt="Foto 6" loading="lazy">
+
+            </div>
+
             <br>
-            Terima kasih sudah menjadi bagian dari perjalanan indah ini. ❤️
-        </p>
 
-        <div class="gallery-grid">
-
-            <img src="assets/photos/1.jpg" alt="Foto 1" loading="lazy">
-            <img src="assets/photos/2.jpg" alt="Foto 2" loading="lazy">
-            <img src="assets/photos/3.jpg" alt="Foto 3" loading="lazy">
-            <img src="assets/photos/4.jpg" alt="Foto 4" loading="lazy">
-            <img src="assets/photos/5.jpg" alt="Foto 5" loading="lazy">
-            <img src="assets/photos/6.jpg" alt="Foto 6" loading="lazy">
+            <button id="nextLetter">
+                💌 Baca Surat
+            </button>
 
         </div>
 
-        <br>
+    </section>
+        <!-- =========================
+         LOVE LETTER
+    ========================== -->
 
-        <button id="nextLetter">
-            💌 Baca Surat
-        </button>
+    <section id="letter" class="hidden-section">
 
-    </div>
+        <div class="glass">
 
-</section>
-<!-- =========================
-     LOVE LETTER
-========================= -->
+            <h2>💌 Untuk Kamu</h2>
 
-<section id="letter" class="hidden-section">
-
-    <div class="glass">
-
-        <h2>💌 Untuk Kamu</h2>
-
-        <p id="typing">
+            <p id="typing">
 Selamat ulang tahun ya sayang ❤️
 
-Semoga semua doa dan harapanmu hari ini satu per satu menjadi kenyataan.
+Semoga di usia yang baru ini kamu selalu diberikan kesehatan,
+kebahagiaan, umur yang berkah, serta dimudahkan dalam setiap langkahmu.
 
-Semoga kamu selalu sehat.
-Semoga selalu bahagia.
-Semoga selalu dikelilingi orang-orang baik.
+Terima kasih karena sudah hadir dan menjadi seseorang yang sangat berarti.
 
-Terima kasih sudah hadir di hidupku.
-Terima kasih sudah menjadi tempat ternyaman.
+Tetaplah menjadi dirimu yang sekarang,
+orang yang selalu membuat hari-hariku terasa lebih indah.
 
-Semoga kita bisa terus membuat cerita indah bersama.
+Aku berharap semua impianmu satu per satu bisa terwujud.
 
-Aku sayang kamu ❤️
-        </p>
+Semoga senyummu tidak pernah hilang,
+dan semoga kita bisa terus membuat banyak kenangan indah bersama.
 
-        <br>
+Sekali lagi...
 
-        <button id="nextReply">
-            💚 Lanjut
-        </button>
+Happy Birthday ❤️
+            </p>
 
-    </div>
+            <br>
 
-</section>
-
-<!-- =========================
-     REPLY SECTION
-========================= -->
-
-<section id="replySection" class="hidden-section">
-
-    <div class="glass">
-
-        <h2>💚 Sebelum Menutup Halaman Ini...</h2>
-
-        <p>
-            Aku ingin tahu bagaimana perasaanmu
-            setelah melihat semua kejutan ini.
-            ❤️
-        </p>
-
-        <textarea
-            id="replyMessage"
-            rows="7"
-            placeholder="Tulis pesanmu di sini..."></textarea>
-
-        <div class="reply-buttons">
-
-            <button id="sendWA">
-                💚 Kirim Pesan
-            </button>
-
-            <button id="sendVideo">
-                📹 Kirim Pesan + Minta Video
+            <button id="nextReply">
+                💚 Lanjut
             </button>
 
         </div>
 
-        <br>
+    </section>
 
-        <button id="nextEnding">
-            ❤️ Selesai
-        </button>
+    <!-- =========================
+         REPLY SECTION
+    ========================== -->
 
-    </div>
+    <section id="replySection" class="hidden-section">
 
-</section>
+        <div class="glass">
 
-<!-- =========================
-     ENDING
-========================= -->
+            <h2>💚 Sebelum Menutup Halaman Ini...</h2>
 
-<section id="ending" class="hidden-section">
+            <p>
+                Aku ingin tahu bagaimana perasaanmu
+                setelah melihat semua kejutan ini.
 
-    <div class="glass">
+                <br><br>
 
-        <h1>❤️ Happy Birthday ❤️</h1>
+                Tulis apa pun yang ingin kamu sampaikan ya ❤️
+            </p>
 
-        <p>
+            <textarea
+                id="replyMessage"
+                rows="7"
+                placeholder="Tulis pesanmu di sini..."></textarea>
 
-            Terima kasih sudah membuka hadiah kecil ini.
+            <div class="reply-buttons">
 
-            <br><br>
+                <button id="sendWA">
+                    💚 Kirim Pesan
+                </button>
 
-            Semoga hari ini menjadi awal
-            dari banyak kebahagiaan baru.
+                <button id="sendVideo">
+                    📹 Kirim Pesan + Minta Video
+                </button>
 
-            <br><br>
+            </div>
 
-            Aku akan selalu mendoakan
-            semua hal terbaik untukmu.
+            <br>
 
-            ❤️
+            <button id="nextEnding">
+                ❤️ Selesai
+            </button>
 
-        </p>
+        </div>
 
-        <br>
+    </section>
 
-        <button id="replay">
-            🔄 Putar Lagi
-        </button>
+    <!-- =========================
+         ENDING
+    ========================== -->
 
-    </div>
+    <section id="ending" class="hidden-section">
 
-</section>
+        <div class="glass">
 
-<!-- =========================
-     CONFETTI
-========================= -->
+            <h1>❤️ Happy Birthday ❤️</h1>
 
-<canvas id="confetti"></canvas>
+            <p>
 
-<script src="script.js"></script>
+                Terima kasih sudah membuka hadiah kecil ini.
+
+                <br><br>
+
+                Semoga hari ini menjadi awal
+                dari banyak kebahagiaan baru.
+
+                <br><br>
+
+                Jangan lupa untuk selalu tersenyum,
+                karena senyummu adalah hal yang paling indah.
+
+                <br><br>
+
+                Semoga Tuhan selalu menjaga setiap langkahmu.
+
+                ❤️
+
+            </p>
+
+            <br>
+
+            <button id="replay">
+                🔄 Putar Lagi
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         CONFETTI
+    ========================== -->
+
+    <canvas id="confetti"></canvas>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
