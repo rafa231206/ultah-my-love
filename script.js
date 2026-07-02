@@ -178,7 +178,7 @@ typingObserver.observe(typing);
 // Tahun, Bulan-1, Tanggal
 // =========================
 
-const startDate = new Date(2026,08,09);
+const startDate = new Date(2026,03,18);
 
 function updateTime(){
 
