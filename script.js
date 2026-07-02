@@ -126,6 +126,7 @@ sections.forEach(sec=>{
     observer.observe(sec);
 
 });
+
 // =========================
 // TYPING EFFECT
 // =========================
@@ -282,6 +283,7 @@ openBtn.addEventListener("click",()=>{
     }
 
 });
+
 // =========================
 // CONFETTI
 // =========================
