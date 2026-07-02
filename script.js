@@ -1,7 +1,6 @@
 // =========================
 // ELEMENT
 // =========================
-
 const openBtn = document.getElementById("openGift");
 const replayBtn = document.getElementById("replay");
 const music = document.getElementById("bgMusic");
