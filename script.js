@@ -1,7 +1,6 @@
 // =========================
 // ELEMENT
 // =========================
-
 const openGift = document.getElementById("openGift");
 const cakeSection = document.getElementById("cakeSection");
 const cakeButton = document.getElementById("cakeButton");
