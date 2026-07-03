@@ -179,7 +179,7 @@ typingObserver.observe(typing);
 // Tahun, Bulan-1, Tanggal
 // =========================
 
-const startDate = new Date(2025,6,15);
+const startDate = new Date(2026,3,18);
 
 function updateTime(){
 
@@ -214,7 +214,7 @@ function birthdayPopup(){
 
     const popup=document.createElement("div");
 
-    popup.innerHTML="🎉 Happy Birthday ❤️";
+    popup.innerHTML="🎉 Happy Birthday 🤍";
 
     popup.style.position="fixed";
     popup.style.left="50%";
