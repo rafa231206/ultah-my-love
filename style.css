@@ -26,12 +26,12 @@ body{
     background:
     linear-gradient(
         135deg,
-        #ff9ec4,
-        #ffd6e8,
-        #ffeef5
+        #fd5196,
+        #fc76b0,
+        #f8c4da
     );
 
-    color:white;
+    color:rgb(255, 255, 255);
 
     overflow-x:hidden;
 
@@ -743,6 +743,196 @@ transform:scale(1);
 }
 
 /* =====================================================
+   MEMORY GAME
+===================================================== */
+
+.memory-section{
+
+    padding:100px 20px;
+
+    text-align:center;
+
+}
+
+.memory-stats{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:22px;
+
+    margin:35px 0 30px;
+
+}
+
+.memory-stats div{
+
+    min-width:110px;
+
+    padding:16px 22px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.2);
+
+    backdrop-filter:blur(12px);
+
+}
+
+.memory-stats span{
+
+    font-size:14px;
+
+    opacity:.9;
+
+}
+
+.memory-stats h3{
+
+    font-size:26px;
+
+    margin-top:4px;
+
+}
+
+.memory-grid{
+
+    width:min(560px,100%);
+
+    margin:0 auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:14px;
+
+    perspective:1000px;
+
+}
+
+.memory-card{
+
+    position:relative;
+
+    aspect-ratio:1/1;
+
+    cursor:pointer;
+
+}
+
+.memory-card-inner{
+
+    position:relative;
+
+    width:100%;
+
+    height:100%;
+
+    border-radius:16px;
+
+    transition:transform .5s;
+
+    transform-style:preserve-3d;
+
+    box-shadow:0 10px 22px rgba(0,0,0,.18);
+
+}
+
+.memory-card.flipped .memory-card-inner,
+.memory-card.matched .memory-card-inner{
+
+    transform:rotateY(180deg);
+
+}
+
+.memory-card-front,
+.memory-card-back{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:16px;
+
+    backface-visibility:hidden;
+
+}
+
+.memory-card-front{
+
+    background:linear-gradient(135deg,var(--pink),var(--pink2));
+
+    font-size:26px;
+
+}
+
+.memory-card-back{
+
+    transform:rotateY(180deg);
+
+    overflow:hidden;
+
+}
+
+.memory-card-back img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.memory-card.matched{
+
+    animation:matchPop .5s;
+
+}
+
+@keyframes matchPop{
+
+0%{
+transform:scale(1);
+}
+
+40%{
+transform:scale(1.12);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.memory-restart{
+
+    margin-top:32px;
+
+}
+
+.memory-win-msg{
+
+    margin-top:22px;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    min-height:28px;
+
+}
+
+/* =====================================================
    LOVE LETTER
 ===================================================== */
 
@@ -789,6 +979,152 @@ transform:scale(1);
     line-height:2;
 
     font-size:18px;
+
+}
+
+/* =====================================================
+   LOVE METER
+===================================================== */
+
+.love-meter-section{
+
+    padding:100px 20px;
+
+    text-align:center;
+
+}
+
+.meter-wrap{
+
+    width:min(420px,90%);
+
+    margin:35px auto 30px;
+
+}
+
+.meter-bar{
+
+    width:100%;
+
+    height:26px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.25);
+
+    overflow:hidden;
+
+    box-shadow:inset 0 2px 8px rgba(0,0,0,.15);
+
+}
+
+.meter-fill{
+
+    height:100%;
+
+    width:0%;
+
+    border-radius:999px;
+
+    background:linear-gradient(90deg,var(--pink2),var(--pink));
+
+    transition:width .35s ease;
+
+}
+
+#meterLabel{
+
+    margin-top:12px;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+.love-tap-btn{
+
+    font-size:60px;
+
+    background:none;
+
+    box-shadow:none;
+
+    padding:10px;
+
+    line-height:1;
+
+    animation:heartPulse 1.4s infinite;
+
+}
+
+.love-tap-btn:hover{
+
+    background:none;
+
+    transform:none;
+
+}
+
+.love-tap-btn:active{
+
+    transform:scale(.85);
+
+}
+
+@keyframes heartPulse{
+
+0%,100%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.1);
+}
+
+}
+
+.meter-message{
+
+    margin-top:20px;
+
+    font-size:19px;
+
+    min-height:28px;
+
+}
+
+.meter-pop{
+
+    position:fixed;
+
+    font-size:20px;
+
+    pointer-events:none;
+
+    z-index:999998;
+
+    animation:meterPopFloat 1s forwards;
+
+}
+
+@keyframes meterPopFloat{
+
+0%{
+
+opacity:1;
+
+transform:translateY(0) scale(1);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:translateY(-70px) scale(1.3);
+
+}
 
 }
 
@@ -1106,6 +1442,34 @@ width:180px;
 .cake-wrapper .text h1{
 
 font-size:42px;
+
+}
+
+.memory-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+gap:10px;
+
+}
+
+.memory-stats{
+
+gap:14px;
+
+}
+
+.memory-stats div{
+
+min-width:90px;
+
+padding:12px 16px;
+
+}
+
+.love-tap-btn{
+
+font-size:50px;
 
 }
 
