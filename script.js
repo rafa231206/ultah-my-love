@@ -1,11 +1,7 @@
-// ======================================
-// HAPPY BIRTHDAY WEBSITE
-// Script by Farel + ChatGPT
-// ======================================
+//
 // =========================
 // ELEMENT
-// =========================
-
+// =======================
 const openBtn = document.getElementById("openGift");
 const replayBtn = document.getElementById("replay");
 
@@ -540,4 +536,4 @@ window.addEventListener("scroll",()=>{
 // =========================
 
 console.log("❤️ Happy Birthday ❤️");
-console.log("Website by Farel");
+console.log(=
