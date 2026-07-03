@@ -731,3 +731,104 @@ font-size:50px;
 color:white;
 cursor:pointer;
    }
+/* ===========================
+   HIDDEN CONTENT
+=========================== */
+
+#hiddenContent{
+    display:none;
+}
+
+/* ===========================
+   MUSIC BUTTON
+=========================== */
+
+#musicBtn{
+
+    position:fixed;
+
+    left:20px;
+
+    bottom:20px;
+
+    width:60px;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#ff4f92;
+
+    color:#fff;
+
+    font-size:24px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    z-index:999999;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+    transition:.3s;
+
+}
+
+#musicBtn:hover{
+
+    transform:scale(1.1);
+
+    background:#ff2f80;
+
+}
+
+/* ===========================
+   LOCK SCROLL
+=========================== */
+
+body.lock-scroll{
+
+    overflow:hidden;
+
+    height:100vh;
+
+}
+
+/* ===========================
+   SHOW ANIMATION
+=========================== */
+
+#hiddenContent.show{
+
+    display:block;
+
+    animation:fadeShow 1s ease;
+
+}
+
+@keyframes fadeShow{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+   }
