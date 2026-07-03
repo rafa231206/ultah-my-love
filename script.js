@@ -1,16 +1,15 @@
-//
-// =========================
+// ======================================
 // ELEMENT
-// =======================
+// ======================================
+
 const openBtn = document.getElementById("openGift");
 const replayBtn = document.getElementById("replay");
 
 const music = document.getElementById("bgMusic");
 const musicBtn = document.getElementById("musicBtn");
 
-const hiddenContent = document.getElementById("hiddenContent");
-
 const loading = document.getElementById("loading");
+const hiddenContent = document.getElementById("hiddenContent");
 
 const hearts = document.getElementById("hearts");
 
@@ -19,521 +18,636 @@ const ctx = canvas.getContext("2d");
 
 const typing = document.getElementById("typing");
 
-// =========================
+let giftOpened = false;
+let confettiAnimation = null;
+
+// ======================================
 // LOCK SCROLL
-// =========================
+// ======================================
 
 document.body.classList.add("lock-scroll");
-
-// sembunyikan isi hadiah
-
 hiddenContent.style.display = "none";
 
-// =========================
+// ======================================
 // LOADING
-// =========================
+// ======================================
 
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
-        loading.style.opacity="0";
+        loading.style.opacity = "0";
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
-            loading.style.display="none";
+            loading.remove();
 
-        },800);
+        }, 800);
 
-    },1500);
-
-});
-
-// =========================
-// MUSIC BUTTON
-// =========================
-
-musicBtn.innerHTML="🔇";
-
-musicBtn.addEventListener("click",()=>{
-
-    if(music.paused){
-
-        music.play().catch(()=>{});
-
-        musicBtn.innerHTML="🔊";
-
-    }else{
-
-        music.pause();
-
-        musicBtn.innerHTML="🔇";
-
-    }
+    }, 1500);
 
 });
 
-// =========================
-// OPEN GIFT
-// =========================
+// ======================================
+// MUSIC
+// ======================================
 
-openBtn.addEventListener("click",()=>{
+music.volume = 0.5;
 
-    hiddenContent.style.display="block";
+function updateMusicButton() {
 
-    setTimeout(()=>{
-
-        hiddenContent.classList.add("show");
-
-    },100);
-
-    document.body.classList.remove("lock-scroll");
-
-    music.play().catch(()=>{});
-
-    musicBtn.innerHTML="🔊";
-
-    createConfetti();
-
-    birthdayPopup();
-
-    for(let i=0;i<80;i++){
-
-        setTimeout(sparkle,i*30);
-
-    }
-
-    setTimeout(()=>{
-
-        document.querySelector(".video-section").scrollIntoView({
-
-            behavior:"smooth"
-
-        });
-
-    },500);
-
-});
-
-// =========================
-// REPLAY
-// =========================
-
-replayBtn.addEventListener("click",()=>{
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-    if(music.paused){
-
-        music.play();
-
-        musicBtn.innerHTML="🔊";
-
-    }
-
-});
-
-// =========================
-// HEART EFFECT
-// =========================
-
-function createHeart(){
-
-    const heart=document.createElement("div");
-
-    heart.className="heart";
-
-    heart.innerHTML=["❤","💖","💕","💗","💘"][Math.floor(Math.random()*5)];
-
-    heart.style.left=Math.random()*100+"vw";
-
-    heart.style.fontSize=(18+Math.random()*20)+"px";
-
-    heart.style.animationDuration=(5+Math.random()*5)+"s";
-
-    hearts.appendChild(heart);
-
-    setTimeout(()=>{
-
-        heart.remove();
-
-    },10000);
+    musicBtn.textContent = music.paused ? "🔇" : "🔊";
 
 }
 
-setInterval(createHeart,300);
-// =========================
+musicBtn.addEventListener("click", async () => {
+
+    try {
+
+        if (music.paused) {
+
+            await music.play();
+
+        } else {
+
+            music.pause();
+
+        }
+
+    } catch (e) {
+
+        console.log(e);
+
+    }
+
+    updateMusicButton();
+
+});
+
+// ======================================
+// OPEN GIFT
+// ======================================
+
+openBtn.addEventListener("click", async () => {
+
+    if (giftOpened) return;
+
+    giftOpened = true;
+
+    hiddenContent.style.display = "block";
+
+    requestAnimationFrame(() => {
+
+        hiddenContent.classList.add("show");
+
+    });
+
+    document.body.classList.remove("lock-scroll");
+
+    try {
+
+        await music.play();
+
+    } catch (e) {}
+
+    updateMusicButton();
+
+    birthdayPopup();
+
+    createConfetti();
+
+    for (let i = 0; i < 80; i++) {
+
+        setTimeout(sparkle, i * 35);
+
+    }
+
+    setTimeout(() => {
+
+        document.querySelector(".video-section").scrollIntoView({
+
+            behavior: "smooth"
+
+        });
+
+    }, 600);
+
+});
+
+// ======================================
+// REPLAY
+// ======================================
+
+replayBtn.addEventListener("click", () => {
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+    if (music.paused) {
+
+        music.play().catch(() => {});
+
+    }
+
+    updateMusicButton();
+
+});
+
+// ======================================
+// FLOATING HEART
+// ======================================
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.textContent = ["❤","💕","💖","💗","💘"][Math.floor(Math.random()*5)];
+
+    heart.style.left = Math.random()*100 + "vw";
+
+    heart.style.fontSize = (18 + Math.random()*20) + "px";
+
+    heart.style.animationDuration = (5 + Math.random()*4) + "s";
+
+    hearts.appendChild(heart);
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 9000);
+
+}
+
+setInterval(createHeart, 350);
+
+// ======================================
 // SCROLL ANIMATION
-// =========================
+// ======================================
 
 const sections = document.querySelectorAll("section");
 
-const observer = new IntersectionObserver((entries)=>{
+const observer = new IntersectionObserver(entries => {
 
-    entries.forEach(entry=>{
+    entries.forEach(entry => {
 
-        if(entry.isIntersecting){
+        if (entry.isIntersecting) {
 
-            entry.target.style.opacity="1";
-            entry.target.style.transform="translateY(0)";
+            entry.target.style.opacity = "1";
+
+            entry.target.style.transform = "translateY(0)";
+
+            observer.unobserve(entry.target);
 
         }
 
     });
 
-},{
-    threshold:0.15
+}, {
+
+    threshold: 0.15
+
 });
 
-sections.forEach(section=>{
+sections.forEach(section => {
 
-    section.style.opacity="0";
+    section.style.opacity = "0";
 
-    section.style.transform="translateY(70px)";
+    section.style.transform = "translateY(60px)";
 
-    section.style.transition="1s";
+    section.style.transition = ".8s";
 
     observer.observe(section);
 
 });
-
-// =========================
+// ======================================
 // TYPING EFFECT
-// =========================
+// ======================================
 
-const message = typing.innerHTML;
+const message = typing.textContent.trim();
 
-typing.innerHTML="";
+typing.textContent = "";
 
-let typingIndex=0;
+let typingIndex = 0;
+let typingStarted = false;
 
-function typeWriter(){
+function typeWriter() {
 
-    if(typingIndex < message.length){
+    if (typingIndex >= message.length) return;
 
-        typing.innerHTML += message.charAt(typingIndex);
+    typing.textContent += message.charAt(typingIndex);
 
-        typingIndex++;
+    typingIndex++;
 
-        setTimeout(typeWriter,35);
-
-    }
+    setTimeout(typeWriter, 35);
 
 }
 
-const typingObserver = new IntersectionObserver((entries)=>{
+const typingObserver = new IntersectionObserver((entries) => {
 
-    entries.forEach(entry=>{
+    entries.forEach(entry => {
 
-        if(entry.isIntersecting){
+        if (entry.isIntersecting && !typingStarted) {
 
-            if(typingIndex===0){
+            typingStarted = true;
 
-                typeWriter();
-
-            }
+            typeWriter();
 
         }
 
     });
+
+}, {
+
+    threshold: 0.4
 
 });
 
 typingObserver.observe(typing);
 
-// =========================
-// COUNTDOWN
-// =========================
+// ======================================
+// TIME TOGETHER
+// ======================================
 
-const startDate = new Date(2026,3,18);
+// Ganti sesuai tanggal jadian kalian
+const startDate = new Date(2026, 3, 18, 0, 0, 0);
 
-function updateTime(){
+function updateTime() {
 
     const now = new Date();
 
-    const diff = now - startDate;
+    let diff = now - startDate;
 
-    const days = Math.floor(diff/(1000*60*60*24));
+    if (diff < 0) diff = 0;
 
-    const hours = Math.floor(diff/(1000*60*60))%24;
+    const days = Math.floor(diff / 86400000);
 
-    const minutes = Math.floor(diff/(1000*60))%60;
+    const hours = Math.floor(diff / 3600000) % 24;
 
-    const seconds = Math.floor(diff/1000)%60;
+    const minutes = Math.floor(diff / 60000) % 60;
 
-    document.getElementById("days").textContent=days;
+    const seconds = Math.floor(diff / 1000) % 60;
 
-    document.getElementById("hours").textContent=
-    hours.toString().padStart(2,"0");
+    document.getElementById("days").textContent = days;
 
-    document.getElementById("minutes").textContent=
-    minutes.toString().padStart(2,"0");
+    document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
 
-    document.getElementById("seconds").textContent=
-    seconds.toString().padStart(2,"0");
+    document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").textContent =
+        String(seconds).padStart(2, "0");
 
 }
 
 updateTime();
 
-setInterval(updateTime,1000);
+setInterval(updateTime, 1000);
 
-// =========================
+// ======================================
 // POPUP
-// =========================
+// ======================================
 
-function birthdayPopup(){
+function birthdayPopup() {
 
-    const popup=document.createElement("div");
+    const popup = document.createElement("div");
 
-    popup.innerHTML="🎉 Happy Birthday 🤍";
+    popup.className = "birthday-popup";
 
-    popup.style.position="fixed";
-    popup.style.left="50%";
-    popup.style.top="50%";
-    popup.style.transform="translate(-50%,-50%)";
+    popup.innerHTML = "🎉 Happy Birthday 🤍";
 
-    popup.style.background="#ffffff";
-    popup.style.color="#ff4f92";
+    Object.assign(popup.style, {
 
-    popup.style.padding="20px 40px";
+        position: "fixed",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%,-50%) scale(.8)",
+        background: "#ffffff",
+        color: "#ff4f92",
+        padding: "20px 40px",
+        borderRadius: "20px",
+        fontSize: "30px",
+        fontWeight: "700",
+        zIndex: "999999",
+        opacity: "0",
+        transition: ".35s",
+        boxShadow: "0 15px 40px rgba(0,0,0,.25)"
 
-    popup.style.borderRadius="20px";
-
-    popup.style.fontSize="30px";
-
-    popup.style.fontWeight="bold";
-
-    popup.style.zIndex="999999";
-
-    popup.style.boxShadow="0 15px 40px rgba(0,0,0,.25)";
+    });
 
     document.body.appendChild(popup);
 
-    setTimeout(()=>{
+    requestAnimationFrame(() => {
 
-        popup.remove();
+        popup.style.opacity = "1";
+        popup.style.transform = "translate(-50%,-50%) scale(1)";
 
-    },2500);
+    });
+
+    setTimeout(() => {
+
+        popup.style.opacity = "0";
+
+        popup.style.transform = "translate(-50%,-50%) scale(.8)";
+
+        setTimeout(() => popup.remove(), 400);
+
+    }, 2200);
 
 }
 
-// =========================
+// ======================================
 // SPARKLE EFFECT
-// =========================
+// ======================================
 
-function sparkle(){
+function sparkle() {
 
-    const star=document.createElement("div");
+    const star = document.createElement("div");
 
-    star.innerHTML="✨";
+    star.textContent = "✨";
 
-    star.style.position="fixed";
+    Object.assign(star.style, {
 
-    star.style.left=Math.random()*window.innerWidth+"px";
+        position: "fixed",
+        left: Math.random() * window.innerWidth + "px",
+        top: Math.random() * window.innerHeight + "px",
+        fontSize: (16 + Math.random() * 18) + "px",
+        pointerEvents: "none",
+        transition: "1.5s",
+        zIndex: "99999"
 
-    star.style.top=Math.random()*window.innerHeight+"px";
-
-    star.style.fontSize=(15+Math.random()*20)+"px";
-
-    star.style.pointerEvents="none";
-
-    star.style.transition="1.5s";
-
-    star.style.zIndex="99999";
+    });
 
     document.body.appendChild(star);
 
-    setTimeout(()=>{
+    requestAnimationFrame(() => {
 
-        star.style.opacity="0";
+        star.style.transform = "translateY(-60px)";
+        star.style.opacity = "0";
 
-        star.style.transform="translateY(-60px)";
+    });
 
-    },100);
-
-    setTimeout(()=>{
+    setTimeout(() => {
 
         star.remove();
 
-    },1600);
+    }, 1500);
 
-                 }
-// =========================
+}
+
+// ======================================
 // CONFETTI
-// =========================
+// ======================================
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
-
-window.addEventListener("resize",()=>{
+window.addEventListener("resize", () => {
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
 });
 
-function createConfetti(){
+let particles = [];
 
-    particles=[];
+function createConfetti() {
 
-    for(let i=0;i<180;i++){
+    particles = [];
+
+    for (let i = 0; i < 180; i++) {
 
         particles.push({
 
-            x:Math.random()*canvas.width,
-
-            y:Math.random()*-canvas.height,
-
-            r:Math.random()*6+4,
-
-            dx:(Math.random()-0.5)*3,
-
-            dy:Math.random()*3+2,
-
-            color:[
+            x: Math.random() * canvas.width,
+            y: Math.random() * -canvas.height,
+            r: 4 + Math.random() * 5,
+            dx: (Math.random() - .5) * 2,
+            dy: 2 + Math.random() * 3,
+            color: [
                 "#ff4f92",
                 "#ff85b3",
                 "#ffd166",
                 "#ffffff",
                 "#ffb6c1"
-            ][Math.floor(Math.random()*5)]
+            ][Math.floor(Math.random() * 5)]
 
         });
 
     }
 
+    if (confettiAnimation) {
+
+        cancelAnimationFrame(confettiAnimation);
+
+    }
+
     animateConfetti();
+
+    setTimeout(() => {
+
+        cancelAnimationFrame(confettiAnimation);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    }, 8000);
 
 }
 
-function animateConfetti(){
+function animateConfetti() {
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    particles.forEach(p=>{
+    particles.forEach(p => {
 
         ctx.beginPath();
 
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
 
-        ctx.fillStyle=p.color;
+        ctx.fillStyle = p.color;
 
         ctx.fill();
 
-        p.x+=p.dx;
+        p.x += p.dx;
+        p.y += p.dy;
 
-        p.y+=p.dy;
+        if (p.y > canvas.height + 20) {
 
-        if(p.y>canvas.height){
+            p.y = -20;
 
-            p.y=-20;
-
-            p.x=Math.random()*canvas.width;
+            p.x = Math.random() * canvas.width;
 
         }
 
     });
 
-    requestAnimationFrame(animateConfetti);
+    confettiAnimation = requestAnimationFrame(animateConfetti);
 
 }
-
-// =========================
+// ======================================
 // GALLERY LIGHTBOX
-// =========================
+// ======================================
 
-const images=document.querySelectorAll(".gallery-grid img");
+const images = document.querySelectorAll(".gallery-grid img");
 
-const lightbox=document.createElement("div");
+const lightbox = document.createElement("div");
+lightbox.id = "lightbox";
 
-lightbox.id="lightbox";
-
-lightbox.innerHTML=`
+lightbox.innerHTML = `
 <span id="closeLightbox">&times;</span>
-<img id="lightboxImage">
+<img id="lightboxImage" alt="Preview">
 `;
 
 document.body.appendChild(lightbox);
 
-const lightboxImage=document.getElementById("lightboxImage");
+const lightboxImage = document.getElementById("lightboxImage");
+const closeLightbox = document.getElementById("closeLightbox");
 
-images.forEach(img=>{
+images.forEach(img => {
 
-    img.addEventListener("click",()=>{
+    img.loading = "lazy";
 
-        lightbox.style.display="flex";
+    img.addEventListener("click", () => {
 
-        lightboxImage.src=img.src;
+        lightbox.style.display = "flex";
+
+        lightboxImage.src = img.src;
+
+        document.body.style.overflow = "hidden";
 
     });
 
 });
 
-lightbox.addEventListener("click",(e)=>{
+function hideLightbox() {
 
-    if(
-        e.target===lightbox ||
-        e.target.id==="closeLightbox"
-    ){
+    lightbox.style.display = "none";
 
-        lightbox.style.display="none";
+    document.body.style.overflow = giftOpened ? "auto" : "hidden";
+
+}
+
+closeLightbox.addEventListener("click", hideLightbox);
+
+lightbox.addEventListener("click", e => {
+
+    if (e.target === lightbox) {
+
+        hideLightbox();
 
     }
 
 });
 
-// =========================
-// BUTTON GLOW
-// =========================
+document.addEventListener("keydown", e => {
 
-setInterval(()=>{
+    if (e.key === "Escape") {
+
+        hideLightbox();
+
+    }
+
+});
+
+// ======================================
+// BUTTON GLOW
+// ======================================
+
+setInterval(() => {
 
     openBtn.animate([
 
         {
-            transform:"scale(1)"
+            transform: "scale(1)"
         },
 
         {
-            transform:"scale(1.08)"
+            transform: "scale(1.08)"
         },
 
         {
-            transform:"scale(1)"
+            transform: "scale(1)"
         }
 
-    ],{
+    ], {
 
-        duration:1800
+        duration: 1800
 
     });
 
-},1800);
+}, 1800);
 
-// =========================
+// ======================================
 // PARALLAX
-// =========================
+// ======================================
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", () => {
 
-    document.body.style.backgroundPositionY=
+    document.body.style.backgroundPositionY =
+        -(window.scrollY * 0.2) + "px";
 
-    -(window.scrollY*0.2)+"px";
+}, {
+
+    passive: true
 
 });
 
-// =========================
-// END
-// =========================
+// ======================================
+// REPLAY IMPROVEMENT
+// ======================================
 
-console.log("❤️ Happy Birthday ❤️");
-console.log(=
+replayBtn.addEventListener("click", () => {
+
+    createConfetti();
+
+    birthdayPopup();
+
+    for (let i = 0; i < 50; i++) {
+
+        setTimeout(sparkle, i * 40);
+
+    }
+
+});
+
+// ======================================
+// IMAGE CHECK
+// ======================================
+
+images.forEach(img => {
+
+    img.onerror = () => {
+
+        console.warn("Gambar tidak ditemukan :", img.src);
+
+        img.style.opacity = ".4";
+
+    };
+
+});
+
+// ======================================
+// AUDIO CHECK
+// ======================================
+
+music.addEventListener("error", () => {
+
+    console.warn("Audio gagal dimuat.");
+
+});
+
+// ======================================
+// FINISH
+// ======================================
+
+updateMusicButton();
+
+console.log("❤️ Happy Birthday Website Loaded Successfully ❤️");
