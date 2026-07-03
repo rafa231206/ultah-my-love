@@ -734,6 +734,313 @@ console.warn("Audio gagal dimuat.");
 });
 
 // ======================================================
+// MEMORY GAME
+// ======================================================
+
+const memoryGrid = document.getElementById("memoryGrid");
+const memMovesEl = document.getElementById("memMoves");
+const memTimerEl = document.getElementById("memTimer");
+const memoryRestartBtn = document.getElementById("memoryRestart");
+const memoryWinMsg = document.getElementById("memoryWinMsg");
+
+const memoryPhotos = Array.from(
+document.querySelectorAll(".gallery-grid img")
+).map(img=>img.getAttribute("src"));
+
+let memFlipped = [];
+let memMatchedCount = 0;
+let memMoves = 0;
+let memBusy = false;
+let memTimerInterval = null;
+let memSeconds = 0;
+let memStarted = false;
+
+function shuffleArray(arr){
+
+const a = arr.slice();
+
+for(let i=a.length-1;i>0;i--){
+
+const j = Math.floor(Math.random()*(i+1));
+
+[a[i],a[j]] = [a[j],a[i]];
+
+}
+
+return a;
+
+}
+
+function formatTime(sec){
+
+const m = String(Math.floor(sec/60)).padStart(2,"0");
+
+const s = String(sec%60).padStart(2,"0");
+
+return m+":"+s;
+
+}
+
+function startMemTimer(){
+
+if(memStarted) return;
+
+memStarted = true;
+
+memTimerInterval = setInterval(()=>{
+
+memSeconds++;
+
+memTimerEl.textContent = formatTime(memSeconds);
+
+},1000);
+
+}
+
+function stopMemTimer(){
+
+clearInterval(memTimerInterval);
+
+}
+
+function buildMemoryBoard(){
+
+memoryGrid.innerHTML = "";
+
+memFlipped = [];
+
+memMatchedCount = 0;
+
+memMoves = 0;
+
+memBusy = false;
+
+memStarted = false;
+
+memSeconds = 0;
+
+stopMemTimer();
+
+memMovesEl.textContent = "0";
+
+memTimerEl.textContent = "00:00";
+
+memoryWinMsg.textContent = "";
+
+const deck = shuffleArray([...memoryPhotos,...memoryPhotos]);
+
+deck.forEach(src=>{
+
+const card = document.createElement("div");
+
+card.className = "memory-card";
+
+card.dataset.src = src;
+
+card.innerHTML =
+'<div class="memory-card-inner">'+
+'<div class="memory-card-front">🤍</div>'+
+'<div class="memory-card-back"><img src="'+src+'" alt="Kenangan"></div>'+
+'</div>';
+
+card.addEventListener("click", onMemoryCardClick);
+
+memoryGrid.appendChild(card);
+
+});
+
+}
+
+function onMemoryCardClick(e){
+
+const card = e.currentTarget;
+
+if(memBusy) return;
+
+if(card.classList.contains("flipped") || card.classList.contains("matched")) return;
+
+if(memFlipped.length >= 2) return;
+
+startMemTimer();
+
+card.classList.add("flipped");
+
+memFlipped.push(card);
+
+if(memFlipped.length === 2){
+
+memMoves++;
+
+memMovesEl.textContent = memMoves;
+
+const first = memFlipped[0];
+const second = memFlipped[1];
+
+if(first.dataset.src === second.dataset.src){
+
+first.classList.add("matched");
+
+second.classList.add("matched");
+
+memFlipped = [];
+
+memMatchedCount++;
+
+if(memMatchedCount === memoryPhotos.length){
+
+stopMemTimer();
+
+memoryWinMsg.textContent =
+"🎉 Selesai dalam "+memMoves+" langkah, "+formatTime(memSeconds)+"! Makasih udah main sayangg 🤍";
+
+createConfetti();
+
+for(let i=0;i<40;i++){
+
+setTimeout(sparkle,i*30);
+
+}
+
+}
+
+}else{
+
+memBusy = true;
+
+setTimeout(()=>{
+
+first.classList.remove("flipped");
+
+second.classList.remove("flipped");
+
+memFlipped = [];
+
+memBusy = false;
+
+},900);
+
+}
+
+}
+
+}
+
+memoryRestartBtn.addEventListener("click", buildMemoryBoard);
+
+if(memoryPhotos.length > 0){
+
+buildMemoryBoard();
+
+}
+
+// ======================================================
+// LOVE METER
+// ======================================================
+
+const loveTapBtn = document.getElementById("loveTapBtn");
+const meterFill = document.getElementById("meterFill");
+const meterLabel = document.getElementById("meterLabel");
+const meterMessage = document.getElementById("meterMessage");
+
+let loveLevel = 0;
+let loveMaxed = false;
+
+const loveMessages = [
+
+{ min:0, max:19, text:"Baru mulai nih... ayo terus ditekan 🤍" },
+{ min:20, max:39, text:"Cieee mulai naik nih cintanya~ 💓" },
+{ min:40, max:59, text:"Wah makin gemes aja liatnya 💕" },
+{ min:60, max:79, text:"Dikit lagi penuh sayangkuu 💗" },
+{ min:80, max:99, text:"Hampir penuh! Semangat dikit lagi 💖" }
+
+];
+
+function updateLoveMeter(){
+
+meterFill.style.width = loveLevel+"%";
+
+meterLabel.textContent = loveLevel+"%";
+
+if(loveLevel >= 100){
+
+if(!loveMaxed){
+
+loveMaxed = true;
+
+meterMessage.textContent =
+"Cintaku ke ayangg gak akan pernah muat di angka 100%, tapi ini cukup buat nunjukkin aku sayang banget sama kamu 🤍♾️";
+
+birthdayPopup();
+
+createConfetti();
+
+}
+
+return;
+
+}
+
+const current = loveMessages.find(m=>loveLevel>=m.min && loveLevel<=m.max);
+
+if(current){
+
+meterMessage.textContent = current.text;
+
+}
+
+}
+
+function spawnMeterPop(){
+
+const rect = loveTapBtn.getBoundingClientRect();
+
+const pop = document.createElement("div");
+
+pop.className = "meter-pop";
+
+pop.textContent = ["+💕","+💗","+💖","+❤️"][Math.floor(Math.random()*4)];
+
+pop.style.left = (rect.left + rect.width/2 - 14 + (Math.random()*30-15)) + "px";
+
+pop.style.top = rect.top + "px";
+
+document.body.appendChild(pop);
+
+setTimeout(()=>{
+
+pop.remove();
+
+},1000);
+
+}
+
+loveTapBtn.addEventListener("click",()=>{
+
+if(loveMaxed) return;
+
+loveLevel = Math.min(100, loveLevel + 4);
+
+updateLoveMeter();
+
+spawnMeterPop();
+
+loveTapBtn.animate([
+
+{transform:"scale(1)"},
+
+{transform:"scale(1.3)"},
+
+{transform:"scale(1)"}
+
+],{
+
+duration:250
+
+});
+
+});
+
+// ======================================================
 // FINISH
 // ======================================================
 
