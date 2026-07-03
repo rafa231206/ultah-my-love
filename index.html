@@ -1,212 +1,554 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday ❤️</title>
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday 🤍</title>
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Font -->
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+
 </head>
 
 <body>
 
-<!-- Loading -->
+<!-- =========================
+     LOADING
+========================= -->
+
 <div id="loading">
-    <h1>Preparing your surprise...</h1>
+
+    <h1>Preparing Your Surprise...</h1>
+
 </div>
 
-<!-- Floating Hearts -->
-<div id="hearts"></div>
+<!-- =========================
+     MUSIC
+========================= -->
 
-<!-- Music -->
 <audio id="bgMusic" loop>
-    <source src="Backstreet Boys - Shape Of My Heart (Official HD Video)_128k.mp3" type="audio/mp3">
+
+    <source
+        src="Backstreet Boys - Shape Of My Heart (Official HD Video)_128k.mp3"
+        type="audio/mp3">
+
 </audio>
 
-<!-- Tombol Play Pause -->
-<button id="musicBtn">🔇</button>
+<button id="musicBtn">
 
-<!-- Landing -->
+    🔇
+
+</button>
+
+<!-- =========================
+     HEART
+========================= -->
+
+<div id="hearts"></div>
+
+<!-- =========================
+     CONFETTI
+========================= -->
+
+<canvas id="confetti"></canvas>
+
+<!-- =========================
+     LANDING
+========================= -->
+
 <section class="hero">
 
     <div class="glass">
 
-        <h3>For My Favorite Person 🤍</h3>
+        <h3>
+            For My Favorite Person 🤍
+        </h3>
 
-        <h1>Happy Birthday</h1>
+        <h1>
 
-        <h2 id="namaPacar">
-            Sayangkuu
+            Happy Birthday
+
+        </h1>
+
+        <h2>
+
+            Sayangkuu ❤️
+
         </h2>
 
         <p>
-            Hari ini adalah hari yang sangat spesial buat ayangg🤍.
-            ini web khusus buatt ayangg🫶.
+
+            Hari ini adalah hari spesial buat ayangg.
+
+            Aku sudah menyiapkan sedikit hadiah kecil
+            dalam bentuk website ini.
+
+            Semoga ayangg suka yaa 🤍
+
         </p>
 
         <button id="openGift">
+
             🎁 Buka Hadiah
+
         </button>
 
     </div>
 
 </section>
 
-<!-- Surprise -->
+<!-- =========================
+     SURPRISE
+========================= -->
+
 <section id="surprise">
 
     <h2>
-        Selamat Ulang Tahun cintaa🤍
+
+        Selamat Ulang Tahun
+        Cintakuuu 🤍
+
     </h2>
 
     <p class="subtitle">
-        Semoga hari ini dan seterusnya ayangg always happy yaa sayangg🫶.
+
+        Semoga semua doa,
+        harapan,
+        dan cita-cita ayangg
+        segera terwujud.
+
     </p>
 
 </section>
 
-<!-- Semua isi di bawah ini akan disembunyikan dulu -->
+<!-- =========================
+     HIDDEN CONTENT
+========================= -->
+
 <div id="hiddenContent">
 
-<!-- Video -->
+<!-- =========================
+     CAKE
+========================= -->
+
+<section class="cake-section">
+
+<div class="cake-card">
+
+<h2>
+
+🎂 Birthday Cake 🎂
+
+</h2>
+
+<p>
+
+Make a wish first yaa 🤍
+
+</p>
+
+<div id="cakeContainer"
+class="cake-hidden">
+
+<div class="cake-wrapper">
+
+<!-- =========================
+     SVG CAKE
+========================= -->
+
+<svg
+id="cake"
+viewBox="0 0 240 250"
+xmlns="http://www.w3.org/2000/svg">
+
+    <!-- plate shadow -->
+    <ellipse cx="120" cy="234" rx="98" ry="12" fill="rgba(0,0,0,.15)"/>
+    <!-- plate -->
+    <ellipse cx="120" cy="226" rx="102" ry="13" fill="#ffffff"/>
+
+    <!-- bottom tier -->
+    <rect x="28" y="160" width="184" height="62" rx="16" fill="var(--pink2)"/>
+    <path d="M28,178
+        q11,16 22,0 q11,16 22,0 q11,16 22,0 q11,16 22,0
+        q11,16 22,0 q11,16 22,0 q11,16 22,0 q11,16 22,0
+        v-18 h-184 z" fill="#ffffff"/>
+
+    <!-- middle tier -->
+    <rect x="52" y="106" width="136" height="60" rx="14" fill="var(--pink)"/>
+    <path d="M52,122
+        q10,14 20,0 q10,14 20,0 q10,14 20,0 q10,14 20,0
+        q10,14 20,0 q10,14 16,0
+        v-16 h-136 z" fill="#ffd6e8"/>
+
+    <!-- top tier -->
+    <rect x="78" y="60" width="84" height="52" rx="12" fill="#ffffff"/>
+    <path d="M78,74
+        q10,12 21,0 q10,12 21,0 q10,12 21,0 q10,12 21,0
+        v-14 h-84 z" fill="var(--pink2)"/>
+
+    <!-- sprinkles -->
+    <circle cx="96" cy="140" r="3" fill="#ffd166"/>
+    <circle cx="146" cy="150" r="3" fill="#ffffff"/>
+    <circle cx="68" cy="196" r="3" fill="#ffd166"/>
+    <circle cx="168" cy="200" r="3" fill="#ffffff"/>
+    <circle cx="120" cy="88" r="3" fill="#ffd166"/>
+    <circle cx="105" cy="190" r="3" fill="#ffffff"/>
+    <circle cx="150" cy="185" r="3" fill="#ffd166"/>
+
+    <!-- candles -->
+    <g class="candles">
+
+        <g class="candle-unit">
+            <rect class="cake-wick" x="88.5" y="46" width="3" height="14" rx="1.5"/>
+            <g class="cake-flame">
+                <ellipse cx="90" cy="41" rx="4.2" ry="6.2" fill="#ff9a3c"/>
+                <ellipse cx="90" cy="42" rx="2.1" ry="3.4" fill="#ffe29a"/>
+            </g>
+        </g>
+
+        <g class="candle-unit">
+            <rect class="cake-wick" x="103.5" y="44" width="3" height="16" rx="1.5"/>
+            <g class="cake-flame">
+                <ellipse cx="105" cy="39" rx="4.2" ry="6.2" fill="#ff9a3c"/>
+                <ellipse cx="105" cy="40" rx="2.1" ry="3.4" fill="#ffe29a"/>
+            </g>
+        </g>
+
+        <g class="candle-unit">
+            <rect class="cake-wick" x="118.5" y="42" width="3" height="18" rx="1.5"/>
+            <g class="cake-flame">
+                <ellipse cx="120" cy="37" rx="4.2" ry="6.2" fill="#ff9a3c"/>
+                <ellipse cx="120" cy="38" rx="2.1" ry="3.4" fill="#ffe29a"/>
+            </g>
+        </g>
+
+        <g class="candle-unit">
+            <rect class="cake-wick" x="133.5" y="44" width="3" height="16" rx="1.5"/>
+            <g class="cake-flame">
+                <ellipse cx="135" cy="39" rx="4.2" ry="6.2" fill="#ff9a3c"/>
+                <ellipse cx="135" cy="40" rx="2.1" ry="3.4" fill="#ffe29a"/>
+            </g>
+        </g>
+
+        <g class="candle-unit">
+            <rect class="cake-wick" x="148.5" y="46" width="3" height="14" rx="1.5"/>
+            <g class="cake-flame">
+                <ellipse cx="150" cy="41" rx="4.2" ry="6.2" fill="#ff9a3c"/>
+                <ellipse cx="150" cy="42" rx="2.1" ry="3.4" fill="#ffe29a"/>
+            </g>
+        </g>
+
+    </g>
+
+</svg>
+
+</div>
+
+<h3>
+
+Happy Birthday
+Sayang 🤍
+
+</h3>
+
+<div class="cake-buttons">
+
+<button
+id="blowCandles">
+
+💨 Tiup Lilin
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- =========================
+     VIDEO
+========================= -->
+
 <section class="video-section">
 
-<h2>Video Untuk my princes 🎥</h2>
+    <h2>
 
-<div class="video-box">
+        Video Untuk Adekk 🤍
 
-<iframe
-    id="birthdayVideo"
-    src="https://player.cloudinary.com/embed/?cloud_name=ozf0nwgq&public_id=lv_7634068236329405697_20260703034109_twqnpi"
-    width="100%"
-    height="500"
-    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-    allowfullscreen
-    frameborder="0"
-    style="border:0;border-radius:20px;">
-</iframe>
+    </h2>
 
-</div>
+    <p class="subtitle">
+
+        Semoga ayangg suka yaa ❤️
+
+    </p>
+
+    <div class="video-box">
+
+        <iframe
+            id="birthdayVideo"
+            src="https://player.cloudinary.com/embed/?cloud_name=ozf0nwgq&public_id=lv_7634068236329405697_20260703034109_twqnpi"
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allowfullscreen
+            frameborder="0">
+
+        </iframe>
+
+    </div>
 
 </section>
 
-<!-- Gallery -->
+<!-- =========================
+     GALLERY
+========================= -->
+
 <section class="gallery">
 
-<h2>Our Memories 📸</h2>
+    <h2>
 
-<div class="gallery-grid">
+        Our Memories 📸
 
-<img src="IMG_20260703_095122.jpg" alt="foto 1">
+    </h2>
 
-<img src="IMG20260518144914.jpg" alt="foto 2">
+    <div class="gallery-grid">
 
-<img src="IMG20260426170950_01.jpg" alt="foto 3">
+        <img
+            src="IMG_20260703_095122.jpg"
+            alt="Foto 1">
 
-<img src="IMG-20260622-WA0170.jpg" alt="foto 4">
+        <img
+            src="IMG20260518144914.jpg"
+            alt="Foto 2">
 
-<img src="IMG_20260703_095107.jpg" alt="foto 5">
+        <img
+            src="IMG20260426170950_01.jpg"
+            alt="Foto 3">
 
-<img src="IMG20260621160103.jpg" alt="foto 6">
+        <img
+            src="IMG-20260622-WA0170.jpg"
+            alt="Foto 4">
 
-</div>
+        <img
+            src="IMG_20260703_095107.jpg"
+            alt="Foto 5">
+
+        <img
+            src="IMG20260621160103.jpg"
+            alt="Foto 6">
+
+    </div>
 
 </section>
 
-<!-- Love Letter -->
+<!-- =========================
+     LOVE LETTER
+========================= -->
 
 <section class="letter">
 
 <div class="glass-letter">
 
-<h2>Untuk adekk</h2>
+<h2>
+
+Untuk Adekk 🤍
+
+</h2>
 
 <p id="typing">
 
-Selamat ulang tahun ya sayang.
-Terima kasih yaa sudah hadir dalam hidup akuu.
-Semoga semua impian ayang tercapai.
-Semoga ayang selalu sehat.
-Semoga selalu dikelilingi orang baik.
-Semoga kita selalu bersama melewati banyak cerita indah.
-Aku bersyukur bisa mengenal ayangg.
-Terima kasih sudah menjadi rumah ternyaman.
-loppp youuuu cintaa 🤍
+Selamat ulang tahun ya sayangkuu ❤️
+
+Semoga panjang umur,
+sehat selalu,
+diberikan rezeki yang melimpah,
+dipermudah semua urusannya,
+dan semua impian ayangg
+bisa tercapai.
+
+Terima kasih sudah hadir
+di hidup aku.
+
+Terima kasih sudah menjadi
+orang terbaik yang pernah aku kenal.
+
+Aku berharap
+kita bisa terus bersama,
+melewati semua cerita,
+suka maupun duka.
+
+Aku sayang banget sama ayangg.
+
+Happy Birthday My Princess 🤍
 
 </p>
 
 </div>
 
-                                </section>
-                                <!-- Countdown -->
+</section>
+
+<!-- =========================
+     COUNTDOWN
+========================= -->
 
 <section class="countdown">
 
-<h2>Time Together ❤️</h2>
+<h2>
+
+Time Together ❤️
+
+</h2>
 
 <div class="time-box">
 
 <div>
-<h1 id="days">000</h1>
+
+<h1 id="days">
+
+000
+
+</h1>
+
 <p>Hari</p>
+
 </div>
 
 <div>
-<h1 id="hours">00</h1>
+
+<h1 id="hours">
+
+00
+
+</h1>
+
 <p>Jam</p>
+
 </div>
 
 <div>
-<h1 id="minutes">00</h1>
+
+<h1 id="minutes">
+
+00
+
+</h1>
+
 <p>Menit</p>
+
 </div>
 
 <div>
-<h1 id="seconds">00</h1>
+
+<h1 id="seconds">
+
+00
+
+</h1>
+
 <p>Detik</p>
+
 </div>
 
 </div>
 
 </section>
-
-<!-- Final -->
+<!-- =========================
+     ENDING
+========================= -->
 
 <section class="ending">
 
-<h1>I Love You adekk</h1>
+    <div class="glass">
 
-<p>
+        <h1>
 
-Happy Birthday Sayang.
-makasihh ya udahh nerimaa akuu.
-doa yangg terbaikk buat ayangg🫰.
-I'm proud of youu sayang.
-🤍
+            I Love You ❤️
 
-</p>
+        </h1>
 
-<button id="replay">
+        <p>
 
-▶ Putar Lagi
+            Terima kasih yaa sudah hadir
+            di hidup aku.
 
-</button>
+            Semoga ayangg selalu bahagia,
+            selalu tersenyum,
+            dan semoga kita selalu bersama
+            sampai tua nanti.
+
+            Happy Birthday once again,
+            My Beautiful Girl 🤍
+
+        </p>
+
+        <button id="replay">
+
+            🔄 Putar Lagi
+
+        </button>
+
+    </div>
 
 </section>
 
 </div>
-<!-- End hiddenContent -->
+<!-- End Hidden Content -->
 
-<!-- Confetti -->
-<canvas id="confetti"></canvas>
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div id="lightbox">
+
+    <span id="closeLightbox">
+
+        &times;
+
+    </span>
+
+    <img
+        id="lightboxImage"
+        alt="Preview">
+
+</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+
+        Made with ❤️ by Your Boyfriend
+
+    </p>
+
+</footer>
+
+<!-- =========================
+     SCRIPT
+========================= -->
 
 <script src="script.js"></script>
 
 </body>
-    </html>
+
+</html>
