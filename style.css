@@ -2848,3 +2848,33 @@ font-size:15px;
 }
 
 }
+
+.bonus-btn{
+    display: block;
+    width: 85%;
+    max-width: 350px;
+    margin: 25px auto;
+    padding: 18px 25px;
+
+    background: #fff;
+    color: #ff4f93;
+    text-decoration: none;
+    text-align: center;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    border-radius: 50px;
+
+    box-shadow: 0 12px 30px rgba(0,0,0,.15);
+    transition: .3s ease;
+}
+
+.bonus-btn:hover{
+    transform: translateY(-3px) scale(1.03);
+    background: #ffe6f0;
+}
+
+.bonus-btn:active{
+    transform: scale(.97);
+}
