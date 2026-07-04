@@ -39,6 +39,60 @@
 </div>
 
 <!-- =========================
+     LOCK SCREEN
+========================= -->
+
+<div id="lockScreen">
+
+    <div class="lock-card">
+
+        <div class="lock-emblem">
+
+            💗
+
+            <span class="lock-badge">🔒</span>
+
+        </div>
+
+        <p class="lock-title" id="lockTitle">
+
+            hayolo, apa yaa kode nyaa
+
+        </p>
+
+        <div class="lock-dots">
+
+            <span class="lock-dot"></span>
+            <span class="lock-dot"></span>
+            <span class="lock-dot"></span>
+            <span class="lock-dot"></span>
+
+        </div>
+
+        <p class="lock-hint" id="lockHint"></p>
+
+        <div class="lock-keypad">
+
+            <button type="button" class="lock-key" data-key="1">1</button>
+            <button type="button" class="lock-key" data-key="2">2</button>
+            <button type="button" class="lock-key" data-key="3">3</button>
+            <button type="button" class="lock-key" data-key="4">4</button>
+            <button type="button" class="lock-key" data-key="5">5</button>
+            <button type="button" class="lock-key" data-key="6">6</button>
+            <button type="button" class="lock-key" data-key="7">7</button>
+            <button type="button" class="lock-key" data-key="8">8</button>
+            <button type="button" class="lock-key" data-key="9">9</button>
+            <button type="button" class="lock-key lock-key-empty" disabled></button>
+            <button type="button" class="lock-key" data-key="0">0</button>
+            <button type="button" class="lock-key" id="lockBackspace">⌫</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================
      MUSIC
 ========================= -->
 
@@ -69,10 +123,60 @@
 <canvas id="confetti"></canvas>
 
 <!-- =========================
+     ENVELOPE INTRO
+========================= -->
+
+<div id="envelopeScreen">
+
+    <div class="envelope-wrap">
+
+        <p class="envelope-hint">Ada surat cinta buat ayangg 💌</p>
+
+        <div class="envelope" id="envelopeBtn">
+
+            <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg" class="envelope-svg">
+
+                <!-- shadow -->
+                <ellipse cx="130" cy="182" rx="110" ry="10" fill="rgba(0,0,0,.18)"/>
+
+                <!-- envelope body -->
+                <rect x="10" y="45" width="240" height="120" rx="14" fill="#ffffff" class="envelope-body"/>
+
+                <!-- inner crease -->
+                <path d="M10,45 L130,120 L250,45" fill="none" stroke="#ffd6e8" stroke-width="5" class="envelope-crease"/>
+
+                <!-- letter (slides up when opened) -->
+                <g class="envelope-letter">
+                    <rect x="42" y="14" width="176" height="108" rx="12" fill="#fff8fb"/>
+                    <line x1="66" y1="46" x2="194" y2="46" stroke="#ffd6e8" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="66" y1="64" x2="178" y2="64" stroke="#ffd6e8" stroke-width="5" stroke-linecap="round"/>
+                    <text x="130" y="96" text-anchor="middle" font-size="26">🤍</text>
+                </g>
+
+                <!-- flap -->
+                <path d="M10,45 L130,118 L250,45 Z" fill="var(--pink2)" class="envelope-flap"/>
+
+                <!-- heart seal -->
+                <g class="envelope-seal" transform="translate(130,70)">
+                    <circle cx="0" cy="0" r="22" fill="var(--pink)"/>
+                    <text x="0" y="9" text-anchor="middle" font-size="22">❤</text>
+                </g>
+
+            </svg>
+
+        </div>
+
+        <p class="envelope-tap">Ketuk amplopnya yaa 🤍</p>
+
+    </div>
+
+</div>
+
+<!-- =========================
      LANDING
 ========================= -->
 
-<section class="hero">
+<section class="hero page active">
 
     <div class="glass">
 
@@ -117,7 +221,7 @@
      SURPRISE
 ========================= -->
 
-<section id="surprise">
+<section id="surprise" class="page">
 
     <h2>
 
@@ -135,6 +239,12 @@
 
     </p>
 
+    <button id="nextSurprise" class="next-btn">
+
+        Lanjut ➜
+
+    </button>
+
 </section>
 
 <!-- =========================
@@ -147,7 +257,7 @@
      CAKE
 ========================= -->
 
-<section class="cake-section">
+<section class="cake-section page">
 
 <div class="cake-card">
 
@@ -287,7 +397,7 @@ id="blowCandles">
      VIDEO
 ========================= -->
 
-<section class="video-section">
+<section class="video-section page">
 
     <h2>
 
@@ -320,13 +430,19 @@ id="blowCandles">
 
     </div>
 
+    <button id="nextVideo" class="next-btn">
+
+        Lanjut ➜
+
+    </button>
+
 </section>
 
 <!-- =========================
      GALLERY
 ========================= -->
 
-<section class="gallery">
+<section class="gallery page">
 
     <h2>
 
@@ -334,33 +450,56 @@ id="blowCandles">
 
     </h2>
 
-    <div class="gallery-grid">
+    <p class="subtitle">
 
-        <img
-            src="IMG_20260703_095122.jpg"
-            alt="Foto 1">
+        Klik tombol kameranya buat lihat foto selanjutnya
 
-        <img
-            src="IMG20260518144914.jpg"
-            alt="Foto 2">
+    </p>
 
-        <img
-            src="IMG20260426170950_01.jpg"
-            alt="Foto 3">
+    <div class="camera-app">
 
-        <img
-            src="IMG-20260622-WA0170.jpg"
-            alt="Foto 4">
+        <p class="camera-app-label">Flower Memories</p>
 
-        <img
-            src="IMG_20260703_095107.jpg"
-            alt="Foto 5">
+        <div class="camera-viewport-row">
 
-        <img
-            src="IMG20260621160103.jpg"
-            alt="Foto 6">
+            <div class="camera-viewfinder">
+
+                <span class="viewfinder-rec"><i class="rec-dot"></i>REC</span>
+
+                <span class="viewfinder-corner tl"></span>
+                <span class="viewfinder-corner tr"></span>
+                <span class="viewfinder-corner bl"></span>
+                <span class="viewfinder-corner br"></span>
+
+                <img id="galleryPhoto" src="IMG_20260703_095122.jpg" alt="Kenangan 1">
+
+                <span class="viewfinder-caption" id="galleryCounter">1 / 6</span>
+
+            </div>
+
+            <div class="camera-dpad">
+
+                <button type="button" class="dpad-btn dpad-up" disabled aria-hidden="true">▲</button>
+
+                <button type="button" class="dpad-btn dpad-left" id="galleryPrev" aria-label="Foto sebelumnya">◀</button>
+
+                <span class="dpad-center"></span>
+
+                <button type="button" class="dpad-btn dpad-right" id="galleryNext" aria-label="Foto selanjutnya">▶</button>
+
+                <button type="button" class="dpad-btn dpad-down" disabled aria-hidden="true">▼</button>
+
+            </div>
+
+        </div>
 
     </div>
+
+    <button id="nextGallery" class="next-btn">
+
+        Lanjut ➜
+
+    </button>
 
 </section>
 
@@ -368,7 +507,7 @@ id="blowCandles">
      MEMORY GAME
 ========================= -->
 
-<section class="memory-section">
+<section class="memory-section page">
 
     <h2>
 
@@ -412,13 +551,19 @@ id="blowCandles">
 
     <p id="memoryWinMsg" class="memory-win-msg"></p>
 
+    <button id="nextMemory" class="next-btn">
+
+        Lanjut ➜
+
+    </button>
+
 </section>
 
 <!-- =========================
      LOVE LETTER
 ========================= -->
 
-<section class="letter">
+<section class="letter page">
 
 <div class="glass-letter">
 
@@ -458,13 +603,19 @@ Happy Birthday My Princess 🤍
 
 </div>
 
+<button id="nextLetter" class="next-btn">
+
+    Lanjut ➜
+
+</button>
+
 </section>
 
 <!-- =========================
      LOVE METER
 ========================= -->
 
-<section class="love-meter-section">
+<section class="love-meter-section page">
 
     <h2>
 
@@ -498,13 +649,19 @@ Happy Birthday My Princess 🤍
 
     </p>
 
+    <button id="nextMeter" class="next-btn">
+
+        Lanjut ➜
+
+    </button>
+
 </section>
 
 <!-- =========================
      COUNTDOWN
 ========================= -->
 
-<section class="countdown">
+<section class="countdown page">
 
 <h2>
 
@@ -564,12 +721,81 @@ Time Together ❤️
 
 </div>
 
+<button id="nextCountdown" class="next-btn">
+
+    Lanjut ➜
+
+</button>
+
 </section>
+
+<!-- =========================
+     REPLY MESSAGE
+========================= -->
+
+<section class="message-section page">
+
+    <div class="glass-letter message-card">
+
+        <h2>Chat Bareng "Dia" (AI) 💌</h2>
+
+        <p class="subtitle">
+
+            Cerita dong perasaan ayangg ke sini yaa,
+            nanti otomatis dibales sama AI-nya,
+            terus obrolan kita bakal kekirim ke emailku 🤍
+
+        </p>
+
+        <div class="wa-chat">
+
+            <div class="wa-chat-header">
+
+                <div class="wa-avatar">🤍</div>
+
+                <div class="wa-chat-info">
+
+                    <p class="wa-chat-name">Ayangkuu (AI)</p>
+
+                    <p class="wa-chat-status" id="waStatus">online</p>
+
+                </div>
+
+            </div>
+
+            <div class="wa-chat-body" id="waChatBody">
+
+                <div class="wa-date-chip">Hari ini</div>
+
+            </div>
+
+            <div class="wa-chat-inputbar">
+
+                <input type="text" id="waInput" placeholder="Ketik pesan di sinii..." autocomplete="off" maxlength="300">
+
+                <button type="button" id="waSendBtn" aria-label="Kirim pesan">➤</button>
+
+            </div>
+
+        </div>
+
+        <p id="waSendEmailStatus" class="reply-status"></p>
+
+    </div>
+
+    <button id="nextMessage" class="next-btn">
+
+        Lanjut ➜
+
+    </button>
+
+</section>
+
 <!-- =========================
      ENDING
 ========================= -->
 
-<section class="ending">
+<section class="ending page">
 
     <div class="glass">
 
