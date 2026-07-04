@@ -2848,37 +2848,3 @@ font-size:15px;
 }
 
 }
-
-.bonus-btn{
-    border:none;
-
-    cursor:pointer;
-
-    border-radius:999px;
-
-    padding:18px 42px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    background:white;
-
-    color:var(--pink);
-
-    transition:.35s;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.2);
-}
-
-.bonus-btn:hover{
-    transform:translateY(-5px);
-
-    background:var(--pink);
-
-    color:white;
-}
-
-.bonus-btn:active{
-    transform: scale(.97);
-}
