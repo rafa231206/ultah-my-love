@@ -11,6 +11,17 @@ const musicBtn = document.getElementById("musicBtn");
 const loading = document.getElementById("loading");
 const hiddenContent = document.getElementById("hiddenContent");
 
+const envelopeScreen = document.getElementById("envelopeScreen");
+const envelopeBtn = document.getElementById("envelopeBtn");
+const heroSection = document.querySelector(".hero");
+
+const lockScreen = document.getElementById("lockScreen");
+const lockCard = document.querySelector(".lock-card");
+const lockDots = document.querySelectorAll(".lock-dot");
+const lockHint = document.getElementById("lockHint");
+const lockKeys = document.querySelectorAll(".lock-key[data-key]");
+const lockBackspace = document.getElementById("lockBackspace");
+
 const hearts = document.getElementById("hearts");
 
 const canvas = document.getElementById("confetti");
@@ -21,17 +32,72 @@ const typing = document.getElementById("typing");
 const cakeContainer = document.getElementById("cakeContainer");
 const blowBtn = document.getElementById("blowCandles");
 
+// Halaman-halaman (page) yang muncul bergiliran, bukan discroll
+const surpriseSection = document.getElementById("surprise");
+const cakeSection = document.querySelector(".cake-section");
+const videoSection = document.querySelector(".video-section");
+const gallerySection = document.querySelector(".gallery");
+const memorySection = document.querySelector(".memory-section");
+const letterSection = document.querySelector(".letter");
+const meterSection = document.querySelector(".love-meter-section");
+const countdownSection = document.querySelector(".countdown");
+const messageSection = document.querySelector(".message-section");
+const endingSection = document.querySelector(".ending");
+
+const nextSurpriseBtn = document.getElementById("nextSurprise");
+const nextVideoBtn = document.getElementById("nextVideo");
+const nextGalleryBtn = document.getElementById("nextGallery");
+const nextMemoryBtn = document.getElementById("nextMemory");
+const nextLetterBtn = document.getElementById("nextLetter");
+const nextMeterBtn = document.getElementById("nextMeter");
+const nextCountdownBtn = document.getElementById("nextCountdown");
+const nextMessageBtn = document.getElementById("nextMessage");
+
+// Chat WA (AI) sebelum kirim email
+const waChatBody = document.getElementById("waChatBody");
+const waInput = document.getElementById("waInput");
+const waSendBtn = document.getElementById("waSendBtn");
+const waStatus = document.getElementById("waStatus");
+const waSendEmailStatus = document.getElementById("waSendEmailStatus");
+
+// Daftar foto kenangan, dipakai bareng oleh galeri kamera & memory game
+const photoList = [
+"IMG_20260703_095122.jpg",
+"IMG20260518144914.jpg",
+"IMG20260426170950_01.jpg",
+"IMG-20260622-WA0170.jpg",
+"IMG_20260703_095107.jpg",
+"IMG20260621160103.jpg"
+];
+
 let giftOpened = false;
 let candleBlown = false;
 
 let confettiAnimation = null;
 
 // ======================================================
+// PAGE NAVIGATION (ganti halaman, bukan scroll)
+// ======================================================
+
+function goToPage(fromSection, toSection){
+
+if(fromSection){
+
+fromSection.classList.remove("active");
+
+}
+
+toSection.classList.add("active");
+
+toSection.scrollTop = 0;
+
+}
+
+// ======================================================
 // LOCK SCROLL
 // ======================================================
 
 document.body.classList.add("lock-scroll");
-hiddenContent.style.display = "none";
 
 // ======================================================
 // LOADING
@@ -50,6 +116,206 @@ loading.remove();
 },800);
 
 },1500);
+
+});
+
+// ======================================================
+// LOCK SCREEN
+// ======================================================
+
+const LOCK_CODE = "1804";
+
+let lockInput = "";
+let lockWrongCount = 0;
+let lockBusy = false;
+
+function updateLockDots(){
+
+lockDots.forEach((dot,i)=>{
+
+dot.classList.toggle("filled", i < lockInput.length);
+
+});
+
+}
+
+function lockWrong(){
+
+lockWrongCount++;
+
+lockCard.classList.add("shake");
+
+setTimeout(()=>{
+
+lockCard.classList.remove("shake");
+
+},450);
+
+if(lockWrongCount >= 2){
+
+lockHint.textContent =
+"Petunjuk: kacian salah yaa, itu lo sayang.. tanggal jadian kitaa 🤍";
+
+}else{
+
+lockHint.textContent = "Kode salah, coba lagi yaa 🥺";
+
+}
+
+setTimeout(()=>{
+
+lockInput = "";
+
+updateLockDots();
+
+lockBusy = false;
+
+},550);
+
+}
+
+function lockCorrect(){
+
+lockHint.textContent = "Yeay bener! 🎉";
+
+setTimeout(()=>{
+
+lockScreen.classList.add("hide");
+
+setTimeout(()=>{
+
+lockScreen.remove();
+
+},650);
+
+},600);
+
+}
+
+function handleLockKey(key){
+
+if(lockBusy) return;
+
+if(lockInput.length >= 4) return;
+
+lockInput += key;
+
+updateLockDots();
+
+if(lockInput.length === 4){
+
+lockBusy = true;
+
+setTimeout(()=>{
+
+if(lockInput === LOCK_CODE){
+
+lockCorrect();
+
+}else{
+
+lockWrong();
+
+}
+
+},250);
+
+}
+
+}
+
+lockKeys.forEach(key=>{
+
+key.addEventListener("click",()=>{
+
+handleLockKey(key.dataset.key);
+
+});
+
+});
+
+lockBackspace.addEventListener("click",()=>{
+
+if(lockBusy) return;
+
+lockInput = lockInput.slice(0,-1);
+
+updateLockDots();
+
+});
+
+// ======================================================
+// ENVELOPE INTRO
+// ======================================================
+
+function spawnEnvelopeBurst(){
+
+const rect = envelopeBtn.getBoundingClientRect();
+
+const cx = rect.left + rect.width/2;
+const cy = rect.top + rect.height/2;
+
+const icons = ["❤","💕","💖","💗","✨"];
+
+for(let i=0;i<18;i++){
+
+const piece = document.createElement("div");
+
+piece.className = "envelope-burst";
+
+piece.textContent = icons[Math.floor(Math.random()*icons.length)];
+
+const angle = Math.random()*Math.PI*2;
+const distance = 60+Math.random()*90;
+
+piece.style.setProperty("--tx",(Math.cos(angle)*distance)+"px");
+piece.style.setProperty("--ty",(Math.sin(angle)*distance-40)+"px");
+
+piece.style.left = cx+"px";
+piece.style.top = cy+"px";
+piece.style.fontSize = (16+Math.random()*16)+"px";
+
+document.body.appendChild(piece);
+
+setTimeout(()=>{
+
+piece.remove();
+
+},1100);
+
+}
+
+}
+
+envelopeBtn.addEventListener("click",()=>{
+
+if(envelopeBtn.classList.contains("opened")) return;
+
+envelopeBtn.classList.add("opened");
+
+spawnEnvelopeBurst();
+
+music.play()
+.then(updateMusicButton)
+.catch(()=>{
+
+updateMusicButton();
+
+});
+
+setTimeout(()=>{
+
+envelopeScreen.classList.add("hide");
+
+heroSection.classList.add("reveal");
+
+setTimeout(()=>{
+
+envelopeScreen.remove();
+
+},650);
+
+},900);
 
 });
 
@@ -96,25 +362,18 @@ if(giftOpened) return;
 
 giftOpened=true;
 
-hiddenContent.style.display="block";
-
-requestAnimationFrame(()=>{
-
-hiddenContent.classList.add("show");
-
-revealHiddenSections();
-
-});
-
 document.body.classList.remove("lock-scroll");
 
-// Kue langsung dimunculkan begitu hadiah dibuka
-// (tanpa perlu tombol "Munculkan Kue" lagi).
+// Pindah dari halaman hero ke halaman "surprise"
+goToPage(heroSection, surpriseSection);
+
+// Kue disiapkan di background supaya sudah siap
+// begitu user sampai di halamannya nanti
 cakeContainer.classList.add("show");
 
 // Putar musik di background TANPA menunggu (await) hasilnya,
 // supaya kalau file musik gagal/lambat dimuat, tampilan
-// (popup, confetti, auto-scroll ke kue) tetap jalan normal.
+// (popup, confetti) tetap jalan normal.
 music.play()
 .then(updateMusicButton)
 .catch(()=>{
@@ -133,16 +392,61 @@ setTimeout(sparkle,i*35);
 
 }
 
-setTimeout(()=>{
+});
 
-document.querySelector(".cake-section")
-.scrollIntoView({
+// ======================================================
+// NEXT PAGE BUTTONS
+// ======================================================
 
-behavior:"smooth"
+nextSurpriseBtn.addEventListener("click",()=>{
+
+goToPage(surpriseSection, cakeSection);
 
 });
 
-},700);
+nextVideoBtn.addEventListener("click",()=>{
+
+goToPage(videoSection, gallerySection);
+
+});
+
+nextGalleryBtn.addEventListener("click",()=>{
+
+goToPage(gallerySection, memorySection);
+
+});
+
+nextMemoryBtn.addEventListener("click",()=>{
+
+goToPage(memorySection, letterSection);
+
+});
+
+nextLetterBtn.addEventListener("click",()=>{
+
+goToPage(letterSection, meterSection);
+
+});
+
+nextMeterBtn.addEventListener("click",()=>{
+
+goToPage(meterSection, countdownSection);
+
+});
+
+nextCountdownBtn.addEventListener("click",()=>{
+
+goToPage(countdownSection, messageSection);
+
+waGreetIfNeeded();
+
+});
+
+nextMessageBtn.addEventListener("click", async ()=>{
+
+await waSendTranscriptToEmail();
+
+goToPage(messageSection, endingSection);
 
 });
 
@@ -189,9 +493,6 @@ smoke.remove();
 document.querySelector(".cake-wrapper")
 .classList.add("cakeBoom");
 
-// Popup
-birthdayPopup();
-
 // Confetti
 createConfetti();
 
@@ -207,15 +508,10 @@ blowBtn.disabled=true;
 
 blowBtn.innerHTML="🎉 Wish Terkabul";
 
-// Scroll ke video
+// Ganti halaman ke video
 setTimeout(()=>{
 
-document.querySelector(".video-section")
-.scrollIntoView({
-
-behavior:"smooth"
-
-});
+goToPage(cakeSection, videoSection);
 
 },2500);
 
@@ -227,14 +523,6 @@ behavior:"smooth"
 
 replayBtn.addEventListener("click",()=>{
 
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
-
-});
-
 if(music.paused){
 
 music.play().catch(()=>{});
@@ -242,6 +530,59 @@ music.play().catch(()=>{});
 }
 
 updateMusicButton();
+
+// Reset semua supaya "Buka Hadiah" & "Tiup Lilin"
+// bisa diklik ulang dari awal
+giftOpened = false;
+
+candleBlown = false;
+
+cakeContainer.classList.remove("show");
+
+document.querySelector(".cake-wrapper")
+.classList.remove("cakeBoom");
+
+document.querySelectorAll(".cake-flame").forEach(f=>{
+
+f.classList.remove("off");
+
+});
+
+blowBtn.disabled = false;
+
+blowBtn.innerHTML = "💨 Tiup Lilin";
+
+// Reset love meter
+loveLevel = 0;
+
+loveMaxed = false;
+
+updateLoveMeter();
+
+meterMessage.textContent = "Klik hatinya sayangkuu 🤍";
+
+// Reset surat (typing effect)
+typing.textContent = "";
+
+typingIndex = 0;
+
+typingStarted = false;
+
+// Reset galeri kamera ke foto pertama
+galleryIndex = 0;
+
+renderGalleryPhoto();
+
+// Reset memory game
+buildMemoryBoard();
+
+// Reset chat AI
+resetWaChat();
+
+document.body.classList.add("lock-scroll");
+
+// Balik ke halaman awal (hero)
+goToPage(endingSection, heroSection);
 
 });
 
@@ -316,26 +657,9 @@ section.style.transform="translateY(60px)";
 
 section.style.transition=".8s";
 
-// Section di dalam #hiddenContent belum punya ukuran (display:none),
-// jadi jangan diamati dulu supaya tidak macet di opacity:0.
-// Baru diamati saat hiddenContent benar-benar ditampilkan.
-if(!section.closest("#hiddenContent")){
-
-observer.observe(section);
-
-}
-
-});
-
-function revealHiddenSections(){
-
-document.querySelectorAll("#hiddenContent section").forEach(section=>{
-
 observer.observe(section);
 
 });
-
-}
 
 // ======================================================
 // TYPING EFFECT
@@ -606,38 +930,96 @@ confettiAnimation=requestAnimationFrame(animateConfetti);
 }
 
 // ======================================================
-// GALLERY LIGHTBOX
+// GALLERY (TAMPILAN KAMERA)
 // ======================================================
 
-const images=document.querySelectorAll(".gallery-grid img");
+const galleryPhoto = document.getElementById("galleryPhoto");
+const galleryCounter = document.getElementById("galleryCounter");
+const galleryPrevBtn = document.getElementById("galleryPrev");
+const galleryNextBtn = document.getElementById("galleryNext");
 
-const lightbox=document.createElement("div");
+let galleryIndex = 0;
 
-lightbox.id="lightbox";
+function renderGalleryPhoto(){
 
-lightbox.innerHTML=`
-<span id="closeLightbox">&times;</span>
-<img id="lightboxImage" alt="Preview">
-`;
+const src = photoList[galleryIndex];
 
-document.body.appendChild(lightbox);
+galleryPhoto.style.opacity = "0";
 
+setTimeout(()=>{
+
+galleryPhoto.src = src;
+
+galleryPhoto.alt = "Kenangan "+(galleryIndex+1);
+
+galleryPhoto.style.opacity = "1";
+
+},150);
+
+galleryCounter.textContent = (galleryIndex+1)+" / "+photoList.length;
+
+}
+
+galleryPhoto.onerror = ()=>{
+
+console.warn("Gambar tidak ditemukan :",galleryPhoto.src);
+
+galleryPhoto.style.opacity=".4";
+
+};
+
+galleryPrevBtn.addEventListener("click",()=>{
+
+galleryIndex = (galleryIndex - 1 + photoList.length) % photoList.length;
+
+renderGalleryPhoto();
+
+});
+
+galleryNextBtn.addEventListener("click",()=>{
+
+galleryIndex = (galleryIndex + 1) % photoList.length;
+
+renderGalleryPhoto();
+
+});
+
+// Navigasi juga bisa pakai tombol panah keyboard, saat halaman galeri aktif
+document.addEventListener("keydown",e=>{
+
+if(!gallerySection.classList.contains("active")) return;
+
+if(e.key === "ArrowLeft"){
+
+galleryPrevBtn.click();
+
+}else if(e.key === "ArrowRight"){
+
+galleryNextBtn.click();
+
+}
+
+});
+
+renderGalleryPhoto();
+
+// ======================================================
+// LIGHTBOX (klik foto kamera buat lihat lebih besar)
+// ======================================================
+
+const lightbox=document.getElementById("lightbox");
 const lightboxImage=document.getElementById("lightboxImage");
 const closeLightbox=document.getElementById("closeLightbox");
 
-images.forEach(img=>{
+galleryPhoto.style.cursor="zoom-in";
 
-img.loading="lazy";
-
-img.addEventListener("click",()=>{
+galleryPhoto.addEventListener("click",()=>{
 
 lightbox.style.display="flex";
 
-lightboxImage.src=img.src;
+lightboxImage.src=galleryPhoto.src;
 
 document.body.style.overflow="hidden";
-
-});
 
 });
 
@@ -708,22 +1090,6 @@ passive:true
 });
 
 // ======================================================
-// IMAGE CHECK
-// ======================================================
-
-images.forEach(img=>{
-
-img.onerror=()=>{
-
-console.warn("Gambar tidak ditemukan :",img.src);
-
-img.style.opacity=".4";
-
-};
-
-});
-
-// ======================================================
 // AUDIO CHECK
 // ======================================================
 
@@ -743,9 +1109,7 @@ const memTimerEl = document.getElementById("memTimer");
 const memoryRestartBtn = document.getElementById("memoryRestart");
 const memoryWinMsg = document.getElementById("memoryWinMsg");
 
-const memoryPhotos = Array.from(
-document.querySelectorAll(".gallery-grid img")
-).map(img=>img.getAttribute("src"));
+const memoryPhotos = photoList;
 
 let memFlipped = [];
 let memMatchedCount = 0;
@@ -970,8 +1334,6 @@ loveMaxed = true;
 meterMessage.textContent =
 "Cintaku ke ayangg gak akan pernah muat di angka 100%, tapi ini cukup buat nunjukkin aku sayang banget sama kamu 🤍♾️";
 
-birthdayPopup();
-
 createConfetti();
 
 }
@@ -1038,7 +1400,298 @@ duration:250
 
 });
 
+loveTapBtn.blur();
+
 });
+
+// ======================================================
+// WA CHAT (AI) SEBELUM KIRIM EMAIL
+// ======================================================
+
+const REPLY_ENDPOINT = "https://formspree.io/f/xwpqpddr";
+
+let waConversation = [];
+let waGreeted = false;
+
+function waNowTime(){
+
+const d = new Date();
+
+const h = String(d.getHours()).padStart(2,"0");
+
+const m = String(d.getMinutes()).padStart(2,"0");
+
+return h+":"+m;
+
+}
+
+function waScrollToBottom(){
+
+waChatBody.scrollTop = waChatBody.scrollHeight;
+
+}
+
+function waAppendMessage(sender, text){
+
+const time = waNowTime();
+
+waConversation.push({ sender, text, time });
+
+const bubble = document.createElement("div");
+
+bubble.className = "wa-msg " + (sender === "user" ? "wa-msg-out" : "wa-msg-in");
+
+const safeText = document.createElement("span");
+
+safeText.textContent = text;
+
+bubble.appendChild(safeText);
+
+const timeEl = document.createElement("span");
+
+timeEl.className = "wa-msg-time";
+
+timeEl.textContent = time;
+
+bubble.appendChild(timeEl);
+
+waChatBody.appendChild(bubble);
+
+waScrollToBottom();
+
+}
+
+function waShowTyping(){
+
+waStatus.textContent = "mengetik...";
+
+waStatus.classList.add("typing");
+
+const typing = document.createElement("div");
+
+typing.className = "wa-typing";
+
+typing.id = "waTypingIndicator";
+
+typing.innerHTML = "<span></span><span></span><span></span>";
+
+waChatBody.appendChild(typing);
+
+waScrollToBottom();
+
+}
+
+function waHideTyping(){
+
+const typing = document.getElementById("waTypingIndicator");
+
+if(typing) typing.remove();
+
+waStatus.textContent = "online";
+
+waStatus.classList.remove("typing");
+
+}
+
+// Kamus kata kunci sederhana biar balesan "AI"-nya kerasa nyambung
+const waReplyBank = {
+
+"sayang": ["Aku juga sayang banget sama kamu 🤍","Duh baca gitu jadi salting sendiri, sayang jugaa 💗"],
+"cinta": ["Cinta aku ke kamu gak akan pernah habis 🤍♾️"],
+"kangen": ["Aku juga kangen banget sama kamu 🥺🤍","Kangen ini obatnya cuma satu, ketemu kamu langsung 💕"],
+"rindu": ["Rindu juga sama kamuu, semoga cepet ketemu yaa 🤍"],
+"makasih": ["Samasama sayangkuu, makasih juga udah mau baca semua ini sampai sini 🤍"],
+"terima kasih": ["Samasama sayangkuu, makasih juga udah mau baca semua ini sampai sini 🤍"],
+"seneng": ["Yeay seneng banget denger kamu bahagia 🥳🤍"],
+"senang": ["Yeay seneng banget denger kamu bahagia 🥳🤍"],
+"bahagia": ["Kebahagiaan kamu itu kebahagiaan aku juga 💗"],
+"sedih": ["Kalau sedih cerita ke aku yaa, aku selalu ada buat dengerin kamu 🤍"],
+"capek": ["Istirahat dulu yaa sayangkuu, jangan terlalu dipaksain 🤍"],
+"lelah": ["Istirahat dulu yaa sayangkuu, jangan terlalu dipaksain 🤍"],
+"cantik": ["Kamu emang selalu cantik kok, dari dulu sampe sekarang 🤍"],
+"ulang tahun": ["Sekali lagi, happy birthday yaa sayangkuu 🎂🤍"],
+"ultah": ["Sekali lagi, happy birthday yaa sayangkuu 🎂🤍"],
+"halo": ["Haii sayangkuu 👋🤍"],
+"hai": ["Haii sayangkuu 👋🤍"],
+"hi": ["Hii jugaa 🤍"]
+
+};
+
+const waFallbackReplies = [
+
+"Aku baca semua pesan kamu kok, makasih udah cerita yaa 🤍",
+"Hehe gemesin banget deh kamu ini 💗",
+"Terus cerita aja sayangkuu, aku dengerin kok 🤍",
+"Wahh iya bener banget tuh 😆",
+"Kamu tuh selalu berhasil bikin aku senyum sendiri 🤍",
+"Duh jadi pengen meluk kamu langsung deh 🥹💕"
+
+];
+
+const waContinueReplies = [
+
+"Lanjutkan sayangg 🤍",
+"Terusin lagi ceritanya sayangg 💗",
+"Iyaa lanjutkan sayangg~",
+"Lanjut terus sayangg, aku bacain kok 🤍",
+"Terusin dong sayangg 🥹"
+
+];
+
+function waGenerateReply(userText){
+
+return waContinueReplies[Math.floor(Math.random()*waContinueReplies.length)];
+
+}
+
+function waSendUserMessage(){
+
+const text = waInput.value.trim();
+
+if(!text) return;
+
+waAppendMessage("user", text);
+
+waInput.value = "";
+
+waShowTyping();
+
+const delay = 900 + Math.random()*900;
+
+setTimeout(()=>{
+
+waHideTyping();
+
+waAppendMessage("ai", waGenerateReply(text));
+
+}, delay);
+
+}
+
+if(waSendBtn){
+
+waSendBtn.addEventListener("click", waSendUserMessage);
+
+}
+
+if(waInput){
+
+waInput.addEventListener("keydown", e=>{
+
+if(e.key === "Enter"){
+
+e.preventDefault();
+
+waSendUserMessage();
+
+}
+
+});
+
+}
+
+function waGreetIfNeeded(){
+
+if(waGreeted) return;
+
+waGreeted = true;
+
+waShowTyping();
+
+setTimeout(()=>{
+
+waHideTyping();
+
+waAppendMessage("ai","Haii sayangkuu 🤍 kasih aku balasan atas web ini yaa sayang, nanti bakal aku kirim ke emailku~");
+
+}, 1100);
+
+}
+
+// Kirim seluruh obrolan ke email pas user klik "Lanjut"
+async function waSendTranscriptToEmail(){
+
+if(waConversation.length === 0) return;
+
+nextMessageBtn.disabled = true;
+
+waSendEmailStatus.textContent = "Mengirim obrolan ke email...";
+
+waSendEmailStatus.classList.remove("reply-status-ok","reply-status-error");
+
+try{
+
+const transcript = waConversation
+
+.filter(m=>m.sender === "user")
+
+.map(m=>{
+
+return "["+m.time+"] Ayangg: "+m.text;
+
+}).join("\n");
+
+const formData = new FormData();
+
+formData.append("message", transcript);
+
+const res = await fetch(REPLY_ENDPOINT,{
+
+method:"POST",
+
+body:formData,
+
+headers:{
+
+"Accept":"application/json"
+
+}
+
+});
+
+if(res.ok){
+
+waSendEmailStatus.textContent = "Obrolannya udah kekirim ke emailku, makasih yaa 🤍";
+
+waSendEmailStatus.classList.add("reply-status-ok");
+
+}else{
+
+throw new Error("Gagal mengirim");
+
+}
+
+}catch(err){
+
+waSendEmailStatus.textContent = "Yah gagal kekirim, tapi tetep lanjut yaa 🥺";
+
+waSendEmailStatus.classList.add("reply-status-error");
+
+}
+
+nextMessageBtn.disabled = false;
+
+}
+
+function resetWaChat(){
+
+waConversation = [];
+
+waGreeted = false;
+
+waChatBody.innerHTML = '<div class="wa-date-chip">Hari ini</div>';
+
+waInput.value = "";
+
+waSendEmailStatus.textContent = "";
+
+waSendEmailStatus.classList.remove("reply-status-ok","reply-status-error");
+
+waStatus.textContent = "online";
+
+waStatus.classList.remove("typing");
+
+}
 
 // ======================================================
 // FINISH
