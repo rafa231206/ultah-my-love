@@ -62,12 +62,23 @@ const waSendEmailStatus = document.getElementById("waSendEmailStatus");
 
 // Daftar foto kenangan, dipakai bareng oleh galeri kamera & memory game
 const photoList = [
-"IMG_20260703_095122.jpg",
-"IMG20260518144914.jpg",
-"IMG20260426170950_01.jpg",
-"IMG-20260622-WA0170.jpg",
-"IMG_20260703_095107.jpg",
-"IMG20260621160103.jpg"
+"1.jpg",
+"3.jpg",
+"5.jpg",
+"6.jpg",
+"8.jpg",
+"9.jpg",
+"10.jpg",
+"13.jpg",
+"15.jpg"
+];
+const photo = [
+"2.jpg",
+"4.jpg",
+"7.jpg",
+"11.jpg",
+"12.jpg",
+"14.jpg"
 ];
 
 let giftOpened = false;
@@ -103,9 +114,69 @@ document.body.classList.add("lock-scroll");
 // LOADING
 // ======================================================
 
+function preloadImage(src){
+
+return new Promise(resolve=>{
+
+const img = new Image();
+
+img.onload = resolve;
+
+img.onerror = resolve;
+
+img.src = src;
+
+});
+
+}
+
+function preloadAudio(src){
+
+return new Promise(resolve=>{
+
+const audio = document.createElement("audio");
+
+audio.oncanplaythrough = resolve;
+
+audio.onerror = resolve;
+
+audio.preload = "auto";
+
+audio.src = src;
+
+});
+
+}
+
+function preloadAllAssets(){
+
+const tasks = [];
+
+photoList.forEach(name=>{
+
+tasks.push(preloadImage(name));
+
+});
+
+const musicSrc = music.querySelector("source")
+? music.querySelector("source").src
+: null;
+
+if(musicSrc){
+
+tasks.push(preloadAudio(musicSrc));
+
+}
+
+return Promise.all(tasks);
+
+}
+
 window.addEventListener("load",()=>{
 
-setTimeout(()=>{
+const minWait = new Promise(resolve=>setTimeout(resolve,1500));
+
+Promise.all([preloadAllAssets(), minWait]).then(()=>{
 
 loading.style.opacity="0";
 
@@ -115,7 +186,7 @@ loading.remove();
 
 },800);
 
-},1500);
+});
 
 });
 
@@ -176,7 +247,7 @@ lockBusy = false;
 
 function lockCorrect(){
 
-lockHint.textContent = "Yeay bener! 🎉";
+lockHint.textContent = "Yeay bener cintaa! 🎉";
 
 setTimeout(()=>{
 
@@ -1109,7 +1180,7 @@ const memTimerEl = document.getElementById("memTimer");
 const memoryRestartBtn = document.getElementById("memoryRestart");
 const memoryWinMsg = document.getElementById("memoryWinMsg");
 
-const memoryPhotos = photoList;
+const memoryPhotos = photo;
 
 let memFlipped = [];
 let memMatchedCount = 0;
@@ -1311,7 +1382,7 @@ let loveMaxed = false;
 
 const loveMessages = [
 
-{ min:0, max:19, text:"Baru mulai nih... ayo terus ditekan 🤍" },
+{ min:0, max:19, text:"Baru mulai nih... ayo sayang terus ditekan 🤍" },
 { min:20, max:39, text:"Cieee mulai naik nih cintanya~ 💓" },
 { min:40, max:59, text:"Wah makin gemes aja liatnya 💕" },
 { min:60, max:79, text:"Dikit lagi penuh sayangkuu 💗" },
@@ -1332,7 +1403,7 @@ if(!loveMaxed){
 loveMaxed = true;
 
 meterMessage.textContent =
-"Cintaku ke ayangg gak akan pernah muat di angka 100%, tapi ini cukup buat nunjukkin aku sayang banget sama kamu 🤍♾️";
+"Ini sebagai bukti sayangg kalo cintaku ke ayang dari 1 ke 100... ehh bukann yang, ini udahh ke unlimited malah hehe 🤍♾️";
 
 createConfetti();
 
@@ -1602,7 +1673,7 @@ setTimeout(()=>{
 
 waHideTyping();
 
-waAppendMessage("ai","Haii sayangkuu 🤍 kasih aku balasan atas web ini yaa sayang, nanti bakal aku kirim ke emailku~");
+waAppendMessage("ai","Haii sayangkuu 🤍 kasih aku balasan atas web ini yaa sayang ");
 
 }, 1100);
 
