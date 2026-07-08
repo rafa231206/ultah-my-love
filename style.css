@@ -1115,6 +1115,87 @@ transform:scale(1);
 }
 
 /* =====================================================
+   FLOWER BOUQUET POP UP
+===================================================== */
+
+.flower-bouquet-popup{
+
+    position:fixed;
+
+    left:50%;
+
+    top:42%;
+
+    z-index:999999;
+
+    pointer-events:none;
+
+    width:min(220px,55vw);
+
+    transform:translate(-50%,-50%) scale(0) rotate(-12deg);
+
+    opacity:0;
+
+    animation:bouquetPopIn 1s cubic-bezier(.34,1.56,.64,1) forwards;
+
+    filter:drop-shadow(0 20px 35px rgba(0,0,0,.3));
+
+}
+
+.flower-bouquet-popup.fade-out{
+
+    animation:bouquetFadeOut .6s ease forwards;
+
+}
+
+.flower-bouquet-popup svg{
+
+    width:100%;
+
+    height:auto;
+
+    display:block;
+
+}
+
+@keyframes bouquetPopIn{
+
+0%{
+transform:translate(-50%,-50%) scale(0) rotate(-16deg);
+opacity:0;
+}
+
+55%{
+transform:translate(-50%,-50%) scale(1.18) rotate(6deg);
+opacity:1;
+}
+
+75%{
+transform:translate(-50%,-50%) scale(.94) rotate(-3deg);
+}
+
+100%{
+transform:translate(-50%,-50%) scale(1) rotate(0deg);
+opacity:1;
+}
+
+}
+
+@keyframes bouquetFadeOut{
+
+from{
+opacity:1;
+transform:translate(-50%,-50%) scale(1) translateY(0);
+}
+
+to{
+opacity:0;
+transform:translate(-50%,-50%) scale(.8) translateY(-40px);
+}
+
+}
+
+/* =====================================================
    VIDEO
 ===================================================== */
 
@@ -1474,6 +1555,20 @@ transform:scale(1);
 
 }
 
+.gallery-note{
+
+    max-width:480px;
+
+    margin:26px auto 0;
+
+    font-size:16px;
+
+    line-height:1.8;
+
+    opacity:.95;
+
+}
+
 /* =====================================================
    MEMORY GAME
 ===================================================== */
@@ -1646,21 +1741,111 @@ transform:scale(1);
 
 }
 
-.memory-restart{
+/* =====================================================
+   MEMORY WIN POPUP
+===================================================== */
 
-    margin-top:32px;
+.memory-win-popup{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:999999;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(60,20,40,.45);
+
+    backdrop-filter:blur(6px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity .35s ease;
 
 }
 
-.memory-win-msg{
+.memory-win-popup.show{
 
-    margin-top:22px;
+    opacity:1;
 
-    font-size:20px;
+    pointer-events:auto;
 
-    font-weight:600;
+}
 
-    min-height:28px;
+.memory-win-popup-card{
+
+    width:min(320px,85vw);
+
+    padding:36px 26px;
+
+    text-align:center;
+
+    border-radius:28px;
+
+    background:linear-gradient(160deg,#fff,#ffe6f1);
+
+    box-shadow:0 25px 60px rgba(0,0,0,.35);
+
+    transform:scale(.7) translateY(30px);
+
+    transition:transform .45s cubic-bezier(.34,1.56,.64,1);
+
+}
+
+.memory-win-popup.show .memory-win-popup-card{
+
+    transform:scale(1) translateY(0);
+
+}
+
+.memory-win-popup-emoji{
+
+    font-size:52px;
+
+    margin-bottom:10px;
+
+    animation:memoryPopEmojiBounce 1.1s ease infinite;
+
+}
+
+.memory-win-popup-card h3{
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:34px;
+
+    color:var(--pink-dark,#d94f8a);
+
+    margin-bottom:10px;
+
+}
+
+.memory-win-popup-card p{
+
+    font-size:15px;
+
+    line-height:1.6;
+
+    color:#5a4450;
+
+}
+
+@keyframes memoryPopEmojiBounce{
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-8px);
+}
 
 }
 
@@ -1711,164 +1896,6 @@ transform:scale(1);
     line-height:2;
 
     font-size:18px;
-
-}
-
-/* =====================================================
-   LOVE METER
-===================================================== */
-
-.love-meter-section{
-
-    padding:100px 20px;
-
-    text-align:center;
-
-}
-
-.meter-wrap{
-
-    width:min(420px,90%);
-
-    margin:35px auto 30px;
-
-}
-
-.meter-bar{
-
-    width:100%;
-
-    height:26px;
-
-    border-radius:999px;
-
-    background:rgba(255,255,255,.25);
-
-    overflow:hidden;
-
-    box-shadow:inset 0 2px 8px rgba(0,0,0,.15);
-
-}
-
-.meter-fill{
-
-    height:100%;
-
-    width:0%;
-
-    border-radius:999px;
-
-    background:linear-gradient(90deg,var(--pink2),var(--pink));
-
-    transition:width .35s ease;
-
-}
-
-#meterLabel{
-
-    margin-top:12px;
-
-    font-size:20px;
-
-    font-weight:700;
-
-}
-
-.love-tap-btn{
-
-    font-size:60px;
-
-    background:none;
-
-    box-shadow:none;
-
-    padding:10px;
-
-    line-height:1;
-
-    animation:heartPulse 1.4s infinite;
-
-    touch-action:manipulation;
-
-    -webkit-tap-highlight-color:transparent;
-
-}
-
-.love-tap-btn:hover{
-
-    background:none;
-
-    transform:none;
-
-}
-
-.love-tap-btn:active{
-
-    transform:scale(.85);
-
-}
-
-@keyframes heartPulse{
-
-0%,100%{
-transform:scale(1);
-}
-
-50%{
-transform:scale(1.1);
-}
-
-}
-
-.meter-message{
-
-    margin-top:20px;
-
-    font-size:19px;
-
-    line-height:1.4;
-
-    min-height:54px;
-
-    display:flex;
-
-    align-items:flex-start;
-
-    justify-content:center;
-
-}
-
-.meter-pop{
-
-    position:fixed;
-
-    font-size:20px;
-
-    pointer-events:none;
-
-    z-index:999998;
-
-    animation:meterPopFloat 1s forwards;
-
-}
-
-@keyframes meterPopFloat{
-
-0%{
-
-opacity:1;
-
-transform:translateY(0) scale(1);
-
-}
-
-100%{
-
-opacity:0;
-
-transform:translateY(-70px) scale(1.3);
-
-}
 
 }
 
@@ -1929,6 +1956,14 @@ transform:translateY(-70px) scale(1.3);
     margin-top:10px;
 
     font-size:18px;
+
+}
+
+.countdown-note{
+
+    max-width:560px;
+
+    margin:36px auto 0;
 
 }
 
@@ -2520,6 +2555,16 @@ body{
 
 }
 
+/* Memory card & chat balasan kontennya sering lebih tinggi dari layar,
+   kalau pake justify-content:center bagian atasnya jadi ketutup/kepotong
+   karena gak bisa discroll ke atas. Jadi dua section ini rata atas aja. */
+.memory-section.page.active,
+.message-section.page.active{
+
+    justify-content:flex-start;
+
+}
+
 .next-btn{
 
     margin-top:35px;
@@ -2646,20 +2691,6 @@ padding:12px 16px;
 
 }
 
-.love-tap-btn{
-
-font-size:50px;
-
-}
-
-.love-meter-section.page.active{
-
-justify-content:flex-start;
-
-padding-top:80px;
-
-}
-
 .envelope-hint{
 
 font-size:17px;
@@ -2689,7 +2720,6 @@ padding:32px 22px;
 .cake-section,
 .video-section,
 .memory-section,
-.love-meter-section,
 .gallery,
 .letter,
 .countdown,
