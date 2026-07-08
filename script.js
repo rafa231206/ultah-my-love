@@ -39,7 +39,6 @@ const videoSection = document.querySelector(".video-section");
 const gallerySection = document.querySelector(".gallery");
 const memorySection = document.querySelector(".memory-section");
 const letterSection = document.querySelector(".letter");
-const meterSection = document.querySelector(".love-meter-section");
 const countdownSection = document.querySelector(".countdown");
 const messageSection = document.querySelector(".message-section");
 const endingSection = document.querySelector(".ending");
@@ -49,7 +48,6 @@ const nextVideoBtn = document.getElementById("nextVideo");
 const nextGalleryBtn = document.getElementById("nextGallery");
 const nextMemoryBtn = document.getElementById("nextMemory");
 const nextLetterBtn = document.getElementById("nextLetter");
-const nextMeterBtn = document.getElementById("nextMeter");
 const nextCountdownBtn = document.getElementById("nextCountdown");
 const nextMessageBtn = document.getElementById("nextMessage");
 
@@ -495,13 +493,7 @@ goToPage(memorySection, letterSection);
 
 nextLetterBtn.addEventListener("click",()=>{
 
-goToPage(letterSection, meterSection);
-
-});
-
-nextMeterBtn.addEventListener("click",()=>{
-
-goToPage(meterSection, countdownSection);
+goToPage(letterSection, countdownSection);
 
 });
 
@@ -564,6 +556,9 @@ smoke.remove();
 document.querySelector(".cake-wrapper")
 .classList.add("cakeBoom");
 
+// Bucket bunga pop up
+spawnFlowerBouquet();
+
 // Confetti
 createConfetti();
 
@@ -622,15 +617,6 @@ f.classList.remove("off");
 blowBtn.disabled = false;
 
 blowBtn.innerHTML = "💨 Tiup Lilin";
-
-// Reset love meter
-loveLevel = 0;
-
-loveMaxed = false;
-
-updateLoveMeter();
-
-meterMessage.textContent = "Klik hatinya sayangkuu 🤍";
 
 // Reset surat (typing effect)
 typing.textContent = "";
@@ -864,6 +850,103 @@ popup.remove();
 },400);
 
 },2200);
+
+}
+
+// ======================================================
+// FLOWER BOUQUET POP UP (muncul pas tiup lilin)
+// ======================================================
+
+function spawnFlowerBouquet(){
+
+const wrap = document.createElement("div");
+
+wrap.className = "flower-bouquet-popup";
+
+wrap.innerHTML = `
+<svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+
+    <!-- vase -->
+    <path d="M70,150 L64,205 Q100,218 136,205 L130,150 Z" fill="#ffffff" stroke="#ffd6e8" stroke-width="4"/>
+    <ellipse cx="100" cy="150" rx="32" ry="9" fill="#ffe5f1"/>
+
+    <!-- stems -->
+    <path d="M100,150 Q98,115 90,90" stroke="#7ac48c" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M100,150 Q102,120 112,95" stroke="#7ac48c" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M100,150 Q100,125 100,100" stroke="#7ac48c" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M100,150 Q92,130 72,112" stroke="#7ac48c" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M100,150 Q108,130 128,112" stroke="#7ac48c" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+    <!-- leaves -->
+    <path d="M96,132 Q80,128 78,140 Q92,144 96,132 Z" fill="#8fd39f"/>
+    <path d="M106,138 Q124,136 126,148 Q110,150 106,138 Z" fill="#8fd39f"/>
+
+    <!-- flower: left pink -->
+    <g transform="translate(72,108)">
+        <circle cx="-11" cy="0" r="10" fill="#ff9ac6"/>
+        <circle cx="11" cy="0" r="10" fill="#ff9ac6"/>
+        <circle cx="0" cy="-11" r="10" fill="#ff9ac6"/>
+        <circle cx="0" cy="11" r="10" fill="#ff9ac6"/>
+        <circle cx="0" cy="0" r="9" fill="#ffe066"/>
+    </g>
+
+    <!-- flower: right pink -->
+    <g transform="translate(128,108)">
+        <circle cx="-11" cy="0" r="10" fill="#ff6fa8"/>
+        <circle cx="11" cy="0" r="10" fill="#ff6fa8"/>
+        <circle cx="0" cy="-11" r="10" fill="#ff6fa8"/>
+        <circle cx="0" cy="11" r="10" fill="#ff6fa8"/>
+        <circle cx="0" cy="0" r="9" fill="#ffe066"/>
+    </g>
+
+    <!-- flower: middle top white -->
+    <g transform="translate(100,88)">
+        <circle cx="-11" cy="0" r="10" fill="#ffffff"/>
+        <circle cx="11" cy="0" r="10" fill="#ffffff"/>
+        <circle cx="0" cy="-11" r="10" fill="#ffffff"/>
+        <circle cx="0" cy="11" r="10" fill="#ffffff"/>
+        <circle cx="0" cy="0" r="9" fill="#ffb6d5"/>
+    </g>
+
+    <!-- flower: left-mid -->
+    <g transform="translate(88,102)">
+        <circle cx="-8" cy="0" r="7.5" fill="#ffd166"/>
+        <circle cx="8" cy="0" r="7.5" fill="#ffd166"/>
+        <circle cx="0" cy="-8" r="7.5" fill="#ffd166"/>
+        <circle cx="0" cy="8" r="7.5" fill="#ffd166"/>
+        <circle cx="0" cy="0" r="6.5" fill="#fff3c4"/>
+    </g>
+
+    <!-- flower: right-mid -->
+    <g transform="translate(112,102)">
+        <circle cx="-8" cy="0" r="7.5" fill="#ff9ac6"/>
+        <circle cx="8" cy="0" r="7.5" fill="#ff9ac6"/>
+        <circle cx="0" cy="-8" r="7.5" fill="#ff9ac6"/>
+        <circle cx="0" cy="8" r="7.5" fill="#ff9ac6"/>
+        <circle cx="0" cy="0" r="6.5" fill="#ffe066"/>
+    </g>
+
+    <!-- sparkle dots -->
+    <circle cx="55" cy="70" r="3" fill="#ffffff"/>
+    <circle cx="150" cy="80" r="2.5" fill="#ffffff"/>
+    <circle cx="60" cy="140" r="2.5" fill="#ffffff"/>
+
+</svg>
+`;
+
+document.body.appendChild(wrap);
+
+setTimeout(()=>{
+
+wrap.classList.add("fade-out");
+
+setTimeout(()=>{
+
+wrap.remove();
+
+},650);
+
+},2600);
 
 }
 
@@ -1177,8 +1260,8 @@ console.warn("Audio gagal dimuat.");
 const memoryGrid = document.getElementById("memoryGrid");
 const memMovesEl = document.getElementById("memMoves");
 const memTimerEl = document.getElementById("memTimer");
-const memoryRestartBtn = document.getElementById("memoryRestart");
-const memoryWinMsg = document.getElementById("memoryWinMsg");
+const memoryWinPopup = document.getElementById("memoryWinPopup");
+const memoryWinPopupText = document.getElementById("memoryWinPopupText");
 
 const memoryPhotos = photo;
 
@@ -1260,7 +1343,7 @@ memMovesEl.textContent = "0";
 
 memTimerEl.textContent = "00:00";
 
-memoryWinMsg.textContent = "";
+memoryWinPopup.classList.remove("show");
 
 const deck = shuffleArray([...memoryPhotos,...memoryPhotos]);
 
@@ -1325,8 +1408,10 @@ if(memMatchedCount === memoryPhotos.length){
 
 stopMemTimer();
 
-memoryWinMsg.textContent =
-"🎉 Selesai dalam "+memMoves+" langkah, "+formatTime(memSeconds)+"! Makasih udah main sayangg 🤍";
+memoryWinPopupText.textContent =
+"Selesai dalam "+memMoves+" langkah, "+formatTime(memSeconds)+"! Makasih udah main sayangg 🤍";
+
+memoryWinPopup.classList.add("show");
 
 createConfetti();
 
@@ -1335,6 +1420,14 @@ for(let i=0;i<40;i++){
 setTimeout(sparkle,i*30);
 
 }
+
+setTimeout(()=>{
+
+memoryWinPopup.classList.remove("show");
+
+goToPage(memorySection, letterSection);
+
+},2600);
 
 }
 
@@ -1360,120 +1453,11 @@ memBusy = false;
 
 }
 
-memoryRestartBtn.addEventListener("click", buildMemoryBoard);
-
 if(memoryPhotos.length > 0){
 
 buildMemoryBoard();
 
 }
-
-// ======================================================
-// LOVE METER
-// ======================================================
-
-const loveTapBtn = document.getElementById("loveTapBtn");
-const meterFill = document.getElementById("meterFill");
-const meterLabel = document.getElementById("meterLabel");
-const meterMessage = document.getElementById("meterMessage");
-
-let loveLevel = 0;
-let loveMaxed = false;
-
-const loveMessages = [
-
-{ min:0, max:19, text:"Baru mulai nih... ayo sayang terus ditekan 🤍" },
-{ min:20, max:39, text:"Cieee mulai naik nih cintanya~ 💓" },
-{ min:40, max:59, text:"Wah makin gemes aja liatnya 💕" },
-{ min:60, max:79, text:"Dikit lagi penuh sayangkuu 💗" },
-{ min:80, max:99, text:"Hampir penuh! Semangat dikit lagi 💖" }
-
-];
-
-function updateLoveMeter(){
-
-meterFill.style.width = loveLevel+"%";
-
-meterLabel.textContent = loveLevel+"%";
-
-if(loveLevel >= 100){
-
-if(!loveMaxed){
-
-loveMaxed = true;
-
-meterMessage.textContent =
-"Ini sebagai bukti sayangg kalo cintaku ke ayang dari 1 ke 100... ehh bukann yang, ini udahh ke unlimited malah hehe 🤍♾️";
-
-createConfetti();
-
-}
-
-return;
-
-}
-
-const current = loveMessages.find(m=>loveLevel>=m.min && loveLevel<=m.max);
-
-if(current){
-
-meterMessage.textContent = current.text;
-
-}
-
-}
-
-function spawnMeterPop(){
-
-const rect = loveTapBtn.getBoundingClientRect();
-
-const pop = document.createElement("div");
-
-pop.className = "meter-pop";
-
-pop.textContent = ["+💕","+💗","+💖","+❤️"][Math.floor(Math.random()*4)];
-
-pop.style.left = (rect.left + rect.width/2 - 14 + (Math.random()*30-15)) + "px";
-
-pop.style.top = rect.top + "px";
-
-document.body.appendChild(pop);
-
-setTimeout(()=>{
-
-pop.remove();
-
-},1000);
-
-}
-
-loveTapBtn.addEventListener("click",()=>{
-
-if(loveMaxed) return;
-
-loveLevel = Math.min(100, loveLevel + 4);
-
-updateLoveMeter();
-
-spawnMeterPop();
-
-loveTapBtn.animate([
-
-{transform:"scale(1)"},
-
-{transform:"scale(1.3)"},
-
-{transform:"scale(1)"}
-
-],{
-
-duration:250
-
-});
-
-loveTapBtn.blur();
-
-});
 
 // ======================================================
 // WA CHAT (AI) SEBELUM KIRIM EMAIL
